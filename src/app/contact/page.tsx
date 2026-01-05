@@ -17,7 +17,7 @@ export default function Contact() {
 
       <div className="flex justify-center gap-4">
         <a
-          href="https://wa.me/5599999999999"
+          href="https://wa.me/5583993711271"
           target="_blank"
           className="rounded bg-green-600 px-6 py-3 text-white"
         >
@@ -25,7 +25,7 @@ export default function Contact() {
         </a>
 
         <a
-          href="mailto:contato@amplatecserv.com.br"
+          href="mailto:amplatecserv@gmail.com"
           className="rounded border px-6 py-3"
         >
           Email

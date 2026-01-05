@@ -1,14 +1,15 @@
+import Image from "next/image";
+
 export default function Hero() {
   return (
     <section className="bg-gray-100 py-20">
       <div className="container mx-auto text-center">
-        <h2 className="mb-6 text-4xl font-bold md:text-5xl">
+        <h2 className="mb-6 text-3xl font-bold md:text-3xl">
           Suporte e assessoria em TI para empresas que não podem parar
         </h2>
 
-        <p className="mx-auto mb-8 max-w-3xl text-lg">
-          A Ampla TecServ ajuda sua empresa a manter sistemas estáveis,
-          seguros e prontos para crescer.
+        <p className="text-black mx-auto mb-8 max-w-4xl text-justify">
+          Prestar serviços de desenvolvimento, implantação, suporte e manutenção de sistemas e aplicações de software, incluindo soluções web e tecnológicas sob demanda. Atuar com consultoria em tecnologia da informação, gestão e organização empresarial. Oferecer suporte técnico, manutenção de equipamentos e soluções digitais. Realizar treinamentos, cursos livres e capacitações na área de tecnologia e inovação.
         </p>
 
         <a

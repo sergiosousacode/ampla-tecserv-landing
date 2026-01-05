@@ -10,7 +10,7 @@ export default function CTA() {
       </p>
 
       <a
-        href="https://wa.me/5599999999999"
+        href="https://wa.me/83993711271"
         target="_blank"
         className="rounded bg-white px-8 py-4 text-blue-600 font-semibold"
       >

@@ -1,10 +1,19 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   return (
-    <header className="border-b">
+    <header className="m-auto ps-10 pe-10 w-full border-b">
       <nav className="container mx-auto flex items-center justify-between p-4">
-        <h1 className="text-xl font-bold">Ampla TecServ</h1>
+        <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/logo_ampla.svg"
+              alt="Logo Ampla TecServ"
+              width={50}
+              height={50}
+              priority
+            />
+        </Link>
 
         <ul className="flex gap-6">
           <li><Link href="/">Home</Link></li>
@@ -15,7 +24,7 @@ export default function Header() {
         </ul>
 
         <a
-          href="https://wa.me/5599999999999"
+          href="https://wa.me/5583993711271"
           target="_blank"
           className="rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700"
         >

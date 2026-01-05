@@ -7,13 +7,14 @@ export default function Home() {
     <>
       <Hero />
 
-      <section className="container mx-auto py-16">
-        <h3 className="mb-4 text-2xl font-bold">Quem somos</h3>
-        <p className="max-w-3xl text-lg">
+      <section className="container mx-auto py-16 text-center md:text-center">
+        <h3 className="mb-4 text-3xl font-bold">Quem somos</h3>
+        <p className="mx-auto max-w-3xl text-lg">
           A Ampla TecServ é especializada em suporte técnico e assessoria
           em TI para empresas que precisam de confiança e eficiência.
         </p>
       </section>
+
       <Testimonials />
       <CTA />
     </>
