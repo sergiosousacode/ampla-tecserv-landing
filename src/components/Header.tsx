@@ -16,11 +16,11 @@ export default function Header() {
         </Link>
 
         <ul className="flex gap-6">
-          <li><Link href="/">Home</Link></li>
-          <li><Link href="/about">About</Link></li>
-          <li><Link href="/services">Services</Link></li>
-          <li><Link href="/contact">Contact</Link></li>
-          <li><Link href="/help">Help</Link></li>
+          <li><Link href="/" className="transition-color hover:text-blue-600">Home</Link></li>
+          <li><Link href="/about" className="transition-color hover:text-blue-600">Sobre</Link></li>
+          <li><Link href="/services" className="transition-color hover:text-blue-600">Serviços</Link></li>
+          <li><Link href="/contact" className="transition-color hover:text-blue-600">Contatos</Link></li>
+          <li><Link href="/help" className="transition-color hover:text-blue-600">Ajuda</Link></li>
         </ul>
 
         <a

@@ -11,22 +11,22 @@ export default function Contact() {
         Precisa de suporte confiável?
       </h2>
 
-      <p className="mb-8 text-lg">
+      <p className="mb-8 text-lg justify-center">
         Fale com a Ampla TecServ e encontre a solução ideal para sua empresa.
       </p>
 
-      <div className="flex justify-center gap-4">
+      <div className="flex justify-center gap-4 ">
         <a
           href="https://wa.me/5583993711271"
           target="_blank"
-          className="rounded bg-green-600 px-6 py-3 text-white"
+          className="rounded bg-green-600 px-6 py-3 text-white hover:bg-green-700"
         >
           WhatsApp
         </a>
 
         <a
           href="mailto:amplatecserv@gmail.com"
-          className="rounded border px-6 py-3"
+          className="rounded border px-6 py-3 hover:bg-gray-100"
         >
           Email
         </a>

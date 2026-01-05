@@ -12,7 +12,7 @@ export default function CTA() {
       <a
         href="https://wa.me/83993711271"
         target="_blank"
-        className="rounded bg-white px-8 py-4 text-blue-600 font-semibold"
+        className="rounded bg-white px-8 py-4 text-blue-600 font-bold hover:bg-gray-100 shadow-2xl"
       >
         WhatsApp
       </a>

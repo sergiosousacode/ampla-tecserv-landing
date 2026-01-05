@@ -14,7 +14,7 @@ export default function Hero() {
 
         <a
           href="/contact"
-          className="rounded bg-blue-600 px-8 py-4 text-white text-lg"
+          className="rounded bg-blue-600 px-8 py-4 text-white text-lg hover:bg-blue-700 shadow-2xl"
         >
           Fale com um especialista
         </a>

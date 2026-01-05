@@ -9,7 +9,7 @@ export default function About() {
     <section className="container mx-auto py-16 text-center md:text-center">
       <h2 className="mb-4 text-3xl font-bold">Sobre a Ampla TecServ</h2>
 
-      <p className="mx-auto max-w-3xl text-lg">
+      <p className="mx-auto max-w-3xl text-lg text-justify">
         A Ampla TecServ nasceu com o objetivo de oferecer suporte técnico e
         assessoria em TI para empresas que precisam de estabilidade,
         segurança e crescimento tecnológico.
