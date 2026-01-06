@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function Contact() {
   return (
-    <section className="container mx-auto py-16 text-center">
+    <section className="container mx-auto py-16 text-center mb-40 space-y-8">
       <h2 className="mb-4 text-3xl font-bold">
         Precisa de suporte confiável?
       </h2>
@@ -26,10 +26,21 @@ export default function Contact() {
 
         <a
           href="mailto:amplatecserv@gmail.com"
-          className="rounded border px-6 py-3 hover:bg-gray-100"
+          className="rounded border px-6 py-3 hover:bg-gray-100 shadow-2xl"
         >
           Email
         </a>
+      </div>
+
+      <div className="mx-auto h-[350px] w-full max-w-5xl overflow-hidden rounded-lg border shadow">
+        <iframe
+          src="https://www.google.com/maps?q=R.%Severino Nicolau%de%Melo,420&output=embed"
+          width="100%"
+          height="100%"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="border-0"
+        />
       </div>
     </section>
   );

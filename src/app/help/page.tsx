@@ -15,9 +15,9 @@ export default function Help() {
 
       <a
         href="#"
-        className="rounded bg-blue-600 px-6 py-3 text-white"
+        className="rounded bg-blue-600 px-6 py-3 text-white hover:bg-blue-700"
       >
-        Acessar Helpdesk
+        Baixar Helpdesk
       </a>
     </section>
   );
