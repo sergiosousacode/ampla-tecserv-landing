@@ -10,25 +10,23 @@ export default function Testimonials() {
         <div className="grid gap-6 md:grid-cols-3">
           <div className="rounded border bg-white p-6 shadow-sm">
             <p className="mb-4 italic">
-              “A Ampla TecServ resolveu problemas críticos de TI da nossa empresa
-              com rapidez e profissionalismo.”
+              “Obrigado pela atenção, do incício ao fim do problema você sempre me manteve informado. Parabéns pelo serviço!”
             </p>
-            <strong>Empresa Alpha</strong>
+            <strong>Rogério, Farmácia Barreto/MG</strong>
           </div>
 
           <div className="rounded border bg-white p-6 shadow-sm">
             <p className="mb-4 italic">
-              “Suporte confiável e sempre disponível. Hoje temos muito mais
-              estabilidade nos sistemas.”
+              “Gratidão pela sua assessoria e pode deixar, quando tiver problemas de meus clientes na ANVISA eu direciono pra seu escritório.”
             </p>
-            <strong>Empresa Beta</strong>
+            <strong>Yuri, Contábil/MG</strong>
           </div>
 
           <div className="rounded border bg-white p-6 shadow-sm">
             <p className="mb-4 italic">
-              “A assessoria em TI foi fundamental para nosso crescimento.”
+              “Sistema muito bom, ótimo custo benefício e se adaptou muito bem a minha Distribuidora Pet. Além de força de venda que é uma ótima ferramenta de vendas.”
             </p>
-            <strong>Parceiro Gama</strong>
+            <strong>Thiago, Recife Pets Distribuidora/PE</strong>
           </div>
         </div>
       </div>

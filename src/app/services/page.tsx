@@ -17,12 +17,12 @@ export default function Services() {
 
         <li className="rounded border p-6 shadow-lg">
           <h3 className="font-bold">Assessoria à pequenas empresas</h3>
-          <p>Planejamento, orientação e preparação de documentos para Microempresas, principalmente no ramo de Drogarias ao que se refere a assuntos regulatórios junto a ANVISA. Troca de Responsabilidade técnica e legal, alterações de cadastr de Pessoas Física e Juídica, declaração de porte e outros serviços relacionados com a Regulados da ANVISA.</p>
+          <p>Planejamento, orientação e preparação de documentos para Microempresas, principalmente no ramo de Drogarias ao que se refere a assuntos regulatórios junto a ANVISA. Troca de Responsabilidade técnica e legal, alterações de cadastro de Pessoas Física e Juídica, declaração de porte e outros serviços relacionados a Regulados.</p>
         </li>
 
         <li className="rounded border p-6 shadow-lg">
-          <h3 className="font-bold">Infraestrutura</h3>
-          <p>Construção de rede cooporativa SERVIDOR e TERMINAL em automação comercial para pequenos comercios. Nossos parceiros comerciais nos fornece softwares homologados, atendendo todos os Estados brasileiros.</p>
+          <h3 className="font-bold">Automação comercial</h3>
+          <p>Construção de rede cooporativa SERVIDOR e TERMINAL em automação comercial para pequenos comércios. Nossos parceiros comerciais nos fornece softwares homologados, atendendo todos os Estados brasileiros. Fornecemos também meios de pagamento TEF, exigência para empresas de adequar à emissão de notas vinculadas a NFCE do seu estado</p>
         </li>
       </ul>
     </section>
