@@ -3,7 +3,7 @@ export default function Testimonials() {
     <section className="bg-gray-100 py-16">
       <div className="container mx-auto px-4"
 >
-        <h3 className="mb-10 text-center text-3xl font-bold">
+        <h3 className="text-blue-600 mb-10 text-center text-3xl font-bold">
           O que nossos clientes dizem
         </h3>
 

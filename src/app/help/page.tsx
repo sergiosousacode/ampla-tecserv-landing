@@ -7,7 +7,7 @@ export const metadata = {
 export default function Help() {
   return (
     <section className="container mx-auto py-16 text-center">
-      <h2 className="mb-4 text-3xl font-bold">Central de Ajuda</h2>
+      <h2 className="text-blue-600 mb-4 text-3xl font-bold">Central de Ajuda</h2>
 
       <p className="mb-8 text-lg">
         Já é cliente? Abra um chamado no nosso helpdesk.

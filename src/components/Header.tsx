@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Header() {
   return (
     <header className="w-full border-1">
-      <nav className="container flex flex-wrap items-center justify-between gap-4 px-10 py-10">
+      <nav className="flex flex-wrap items-center justify-between gap-4 px-10 py-10">
         
         <Link href="/" className="flex items-center gap-3">
           <Image

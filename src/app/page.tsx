@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <Hero />
       <section className="container p-8 mx-auto py-16 text-center md:text-center">
-        <h3 className="mb-4 text-3xl font-bold">Nossos Parceiros Comerciais</h3>
+        <h3 className="text-blue-600 mb-4 text-3xl font-bold">Nossos Parceiros Comerciais</h3>
         <p className="text-black mx-auto mb-8 max-w-4xl text-justify">
           Trabalhamos com parceiros comerciais de renome para garantir que nossos clientes recebam as melhores soluções e serviços disponíveis no mercado. Nossa rede de parceiros nos permite oferecer uma ampla gama de tecnologias e expertise para atender às necessidades específicas de cada cliente.
         </p>
