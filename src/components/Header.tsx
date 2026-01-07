@@ -38,7 +38,6 @@ export default function Header() {
           href="https://wa.me/5583993711271"
           target="_blank"
           className="
-            w-full 
             rounded 
             bg-green-600 
             px-4 

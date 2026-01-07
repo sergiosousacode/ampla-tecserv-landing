@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function About() {
   return (
-    <section className="container mx-auto py-16 text-center md:text-center">
+    <section className="container mx-auto py-16 text-center md:text-center p-8">
       <h2 className="mb-4 text-3xl font-bold">Sobre a Ampla TecServ</h2>
 
       <p className="mx-auto max-w-3xl text-lg text-justify">
