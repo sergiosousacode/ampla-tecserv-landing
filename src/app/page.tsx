@@ -2,10 +2,14 @@ import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import Testimonials from "@/components/Testimonials";
 import Image from "next/image";
+import Head from "next/head";
 
 export default function Home() {
   return (
     <>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Hero />
       <section className="container p-8 mx-auto py-16 text-center md:text-center">
         <h3 className="text-blue-600 mb-4 text-3xl font-bold">Nossos Parceiros Comerciais</h3>
