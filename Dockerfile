@@ -1,12 +1,4 @@
-# imagem base
-FROM node:18-alpine
-
-# diretório de trabalho
-WORKDIR /app
-
-# copia dependências
-COPY package*.json ./
-
+# ===== STAGE 1: build =====
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -17,13 +9,20 @@ RUN npm install
 COPY . .
 RUN npm run build
 
+
+# ===== STAGE 2: produção =====
 FROM node:20-alpine
 
 WORKDIR /app
 
-COPY --from=builder /app ./
+# copia só o necessário
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+# se for Next.js:
+# COPY --from=builder /app/.next ./.next
+# COPY --from=builder /app/public ./public
 
 EXPOSE 3000
 CMD ["npm", "start"]
 
-COPY .env* ./
