@@ -26,7 +26,7 @@ export default function Services() {
         <li className="rounded border p-6 shadow-lg text-justify">
           <Image
             src="/partners/servico.svg"
-            alt="Suporte técnico"
+            alt="Serviços de TI"
             width={100}
             height={100}
             className="mx-auto mb-4 animate-pulse [animation-duration:4s]"
