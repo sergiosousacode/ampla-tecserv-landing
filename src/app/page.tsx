@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon-v2.ico" />
       </Head>
       <Hero />
       <section className="container p-8 mx-auto py-16 text-center md:text-center">
