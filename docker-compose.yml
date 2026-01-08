@@ -4,8 +4,8 @@ services:
   web:
     container_name: ampla-landing
     image: ampla-tec-landing
+    env_file: .env
     build: .
     ports:
       - "3000:3000"
     restart: unless-stopped
-    env_files:

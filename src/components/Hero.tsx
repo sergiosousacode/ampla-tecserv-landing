@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative bg-[url('/bg_service.jpg')] bg-cover bg-auto p-8 bg-fixed brightness-50">
+    <section className="relative bg-[url('/bg_service.png')] bg-cover bg-auto p-8 bg-fixed brightness-50">
       <div className="container p-8 text-center">
         <h2 className="mb-6 text-3xl font-bold md:text-3xl text-blue-600">
           Suporte e assessoria para empresas que não podem parar.
