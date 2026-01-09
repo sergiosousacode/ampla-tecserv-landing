@@ -2,9 +2,12 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative bg-[url('/bg_service.png')] bg-cover bg-auto p-8 bg-fixed brightness-50">
+    <section className="relative bg-[url('/bg_service.png')] bg-cover bg-auto p-8 bg-fixed brightness-80">
       <div className="container p-8 text-center">
-        <h2 className="mb-6 text-3xl font-bold md:text-3xl text-blue-600">
+        <h2 className="mb-6 font-bold md:text-2xl
+
+ text-2xl
+ text-blue-600">
           Suporte e assessoria para empresas que não podem parar.
         </h2>
 
@@ -14,7 +17,7 @@ export default function Hero() {
 
         <a
           href="/contact"
-          className="rounded bg-blue-600 px-8 py-4 text-white text-lg hover:bg-blue-700"
+          className="rounded max-w-3xs text-xs bg-blue-600 px-8 py-4 text-white text-lg hover:bg-blue-700"
         >
           Fale com um especialista
         </a>

@@ -1,7 +1,9 @@
 export default function CTA() {
   return (
     <section className="bg-blue-600 py-16 text-white text-center">
-      <h3 className="mb-4 text-3xl font-bold p-4">
+      <h3 className="mb-4 text-2xl
+
+ font-bold p-4">
         Pronto para melhorar a tecnologia da sua empresa?
       </h3>
 

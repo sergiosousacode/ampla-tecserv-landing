@@ -9,7 +9,7 @@ export const metadata = {
 export default function Services() {
   return (
     <section className="container mx-auto px-4 py-16 text-center sm:px-6 lg:px-100">
-      <h2 className="text-blue-600 mb-8 text-3xl font-bold">Nossos Serviços</h2>
+      <h2 className="text-blue-600 mb-8 text-2xl font-bold">Nossos Serviços</h2>
       <ul className="grid grid-cols-1 gap-6">
         <li className="rounded border p-6 shadow-lg text-justify">
           <Image

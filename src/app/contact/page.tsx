@@ -7,7 +7,7 @@ export const metadata = {
 export default function Contact() {
   return (
     <section className="container mx-auto py-16 text-center mb-40 space-y-8">
-      <h2 className="text-blue-600 mb-4 text-3xl font-bold">
+      <h2 className="text-blue-600 mb-4 text-2xl font-bold">
         Precisa de suporte confiável?
       </h2>
 
