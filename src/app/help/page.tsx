@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function Help() {
   return (
-    <section className="container mx-auto px-4 text-center">
+    <section className="container mt-20 mx-auto px-4 text-center">
       <h2 className="text-blue-600 mb-4 text-2xl
 
  font-bold">Central de Ajuda</h2>

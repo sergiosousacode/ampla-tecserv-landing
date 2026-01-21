@@ -5,7 +5,7 @@ import Container from "./Container";
 export default function Header() {
   return (
     <header>
-      <Container className="text-center">
+      <Container className="shadow-xl text-center">
 
       <nav className="flex flex-wrap items-center justify-between gap-4 px-10 py-10">
         
