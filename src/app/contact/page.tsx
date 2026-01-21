@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function Contact() {
   return (
-    <section className="container mx-auto py-16 text-center mb-40 space-y-8">
+    <section className="container mx-auto px-4 text-center mb-40 space-y-8">
       <h2 className="text-blue-600 mb-4 text-2xl font-bold">
         Precisa de suporte confiável?
       </h2>
@@ -21,7 +21,7 @@ export default function Contact() {
           target="_blank"
           className="rounded bg-green-600 px-6 py-3 text-white hover:bg-green-700"
         >
-          WhatsApp
+          WhatsApp Comercial
         </a>
 
         <a

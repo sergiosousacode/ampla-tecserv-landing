@@ -13,7 +13,7 @@ export default function WhatsAppFloat() {
         transition delay-200 duration-900 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-blue-500 hover:text-white ...
       "
     >
-      Whats'up
+      Chama aqui!
     </a>
   );
 }

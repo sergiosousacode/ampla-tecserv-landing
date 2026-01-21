@@ -1,9 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import Container from "./Container";
 
 export default function Header() {
   return (
-    <header className="w-full border-1">
+    <header>
+      <Container className="text-center">
+
       <nav className="flex flex-wrap items-center justify-between gap-4 px-10 py-10">
         
         <Link href="/" className="flex items-center gap-3">
@@ -53,6 +56,7 @@ export default function Header() {
         </a>
 
       </nav>
+      </Container>
     </header>
   );
 }
