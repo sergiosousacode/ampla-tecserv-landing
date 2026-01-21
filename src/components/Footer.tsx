@@ -25,7 +25,7 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            © 2026 - AMPLA TecServ - 1.0.0v
+            By Ampla TecServ © 2026 - AMPLA TecServ - 1.0.0v
           </div>
       </Container>
     </footer>
