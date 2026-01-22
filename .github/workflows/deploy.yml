@@ -2,8 +2,8 @@ name: Deploy Docker VM
 
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -25,5 +25,5 @@ jobs:
             git checkout main
             git pull origin main
             docker compose down
-            docker compose build
+            docker compose build --no-cache
             docker compose up -d
