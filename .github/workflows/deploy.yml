@@ -2,8 +2,8 @@ name: Deploy Docker VM
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*.*.*'
 
 jobs:
   deploy:

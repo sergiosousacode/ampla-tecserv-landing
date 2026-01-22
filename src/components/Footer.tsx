@@ -64,7 +64,7 @@ export default function Footer() {
           </div>
 
           <div className="md:self-end text-sm">
-            By Ampla TecServ © 2026 – AMPLA TecServ – 1.0.0v
+            By Ampla TecServ © 2026 – AMPLA TecServ – v1.1.0
           </div>
         </div>
       </Container>
