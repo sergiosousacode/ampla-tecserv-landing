@@ -5,13 +5,8 @@ export default function Footer() {
   return (
     <footer className="bg-gray-200 text-gray-700 p-8">
       <Container>
-        <div
-          className="
-            flex flex-col gap-8 text-center
-            md:flex-row md:justify-between md:text-left
-          "
-        >
-          <div className="max-w-sm">
+        <div className="flex flex-col gap-8 text-center md:flex-row md:justify-between md:text-left">
+          <div>
             <h2 className="font-bold mb-2">Entre em contato</h2>
             <p>
               Rua Severino Nicolau de Melo, 420 Sala 207 B
