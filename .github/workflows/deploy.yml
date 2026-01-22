@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /var/www/landingpage
+            cd /home/ubuntu/ampla-tecserv-landing
             git fetch --all
             git checkout main
             git pull origin main
