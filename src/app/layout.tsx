@@ -28,10 +28,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body>
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <WhatsAppFloat />
-        <Footer />
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <WhatsAppFloat />
+          <Footer />
       </body>
     </html>
   );

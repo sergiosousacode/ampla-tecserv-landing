@@ -1,12 +1,10 @@
 import Image from "next/image";
-import Container from "./Container";
 
 export default function Testimonials() {
   return (
-    <section className="flex justify-around bg-gray-100 py-16">
-      <Container className="text-center">
-        <h3 className="text-blue-600 mb-10 text-center text-2xl font-bold">
-          O que nossos clientes dizem
+    <section className="flex flex-col justify-around py-16">
+        <h3 className="text-white mb-10 text-center text-2xl font-bold">
+          O QUE DIZEM NOSSOS CLIENTES!
         </h3>
 
         <div className="grid gap-6 md:grid-cols-3">     
@@ -88,11 +86,6 @@ export default function Testimonials() {
             </span>
           </div>
         </div>
-      </Container>
-      {/* final aqui */}
-
-
-
     </section>
   );
 }

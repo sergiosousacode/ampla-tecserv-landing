@@ -1,13 +1,14 @@
 import Link from "next/link";
+import { URLS } from "@/config/urls";
 import Image from "next/image";
-import Container from "./Container";
+import Button_wa from "./ui/Button_wa";
+
 
 export default function Header() {
   return (
     <header>
-      <Container className="shadow-xl text-center">
 
-      <nav className="flex flex-wrap items-center justify-between gap-4 px-10 py-10">
+      <nav className="flex flex-wrap items-center justify-between gap-4 px-50 py-10">
         
         <Link href="/" className="flex items-center gap-3">
           <Image
@@ -19,7 +20,10 @@ export default function Header() {
           />
         </Link>
 
-        <ul className="hidden w-full 
+        <ul className="
+          hidden 
+          w-full
+          flex 
           flex-col 
           gap-4 
           text-lg 
@@ -29,34 +33,16 @@ export default function Header() {
           md:flex-row 
           md:gap-6
         ">
-          <li><Link href="/" className="transition-colors hover:text-blue-600">Home</Link></li>
-          <li><Link href="/about" className="transition-colors hover:text-blue-600">Sobre</Link></li>
-          <li><Link href="/services" className="transition-colors hover:text-blue-600">Serviços</Link></li>
-          <li><Link href="/contact" className="transition-colors hover:text-blue-600">Contatos</Link></li>
-          <li><Link href="/help" className="transition-colors hover:text-blue-600">Ajuda</Link></li>
+          <li><Link href="/" className="transition-colors hover:text-sky-600">Home</Link></li>
+          <li><Link href="/about" className="transition-colors hover:text-sky-600">Sobre</Link></li>
+          <li><Link href="/services" className="transition-colors hover:text-sky-600">Serviços</Link></li>
+          <li><Link href="/contact" className="transition-colors hover:text-sky-600">Contatos</Link></li>
+          <li><Link href="/help" className="transition-colors hover:text-sky-600">Ajuda</Link></li>
         </ul>
-
-        {/* BOTÃO */}
-        <a
-          href="https://wa.me/5583993711271"
-          target="_blank"
-          className="
-            rounded 
-            bg-green-600 
-            px-4 
-            py-2 
-            text-center 
-            text-white 
-            transition 
-            hover:bg-green-700
-            md:w-auto
-          "
-        >
-          WhatsApp
-        </a>
+        
+        <Button_wa />
 
       </nav>
-      </Container>
     </header>
   );
 }

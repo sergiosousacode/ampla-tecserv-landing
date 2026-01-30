@@ -1,7 +1,9 @@
+import { URLS } from "@/config/urls";
+
 export default function WhatsAppFloat() {
   return (
     <a
-      href="https://wa.me/5583993711271"
+      href={URLS.WHATSAPP}
       target="_blank"
       aria-label="Falar no WhatsApp"
       className="
