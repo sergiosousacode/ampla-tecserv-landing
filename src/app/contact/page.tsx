@@ -12,15 +12,15 @@ export const metadata = {
 
 export default function Contact() {
   return (
-    <Wrapper className="bg-sky-500 px-50">
+    <Wrapper className="bg-sky-500 min-h-screen px-50 dark:bg-bg">
       <MaxWidth>
         <section className="text-center">
           <div className="mx-auto px-4 py-25">
-            <h2 className="text-white mb-4 text-2xl font-bold">
-              Precisa de suporte confiável?
+            <h2 className="text-white mb-4 text-3xl font-bold dark:text-text">
+              PRECISA DE SUPORTE CONFIÁVEL?
             </h2>
 
-            <p className="mb-8 text-lg justify-center">
+            <p className="mb-8 text-2xl justify-center">
               Fale com a Ampla TecServ e encontre a solução ideal para sua empresa.
             </p>
             <Button_wa />

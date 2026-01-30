@@ -1,9 +1,23 @@
 @import "tailwindcss";
 
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  /* Tamanhos base */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+
+  /* Cores */
+  --bg: #ffffff;
+  --text: #0f172a;
+}
+.dark {
+  --bg: #020617;
+  --text: #e5e7eb;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,10 +30,12 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+/* body {
   @apply text-slate-900 antialiased;
   box-sizing: border-box;
-}
+} */
+
+
 
 
 

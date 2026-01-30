@@ -10,12 +10,12 @@ export const metadata = {
 
 export default function Services() {
   return (
-    <Wrapper className="bg-sky-500 px-50">
+    <Wrapper className="bg-sky-500 min-h-screen px-50 dark:bg-bg">
       <MaxWidth>
-        <section className="mx-auto px-4 mx-auto px-4 py-16 text-center sm:px-6 lg:px-100">
-          <h2 className="text-white mb-8 text-2xl font-bold">NOSSOS SERVIÇOS</h2>
+        <section className="mx-auto text-center py-16 px-50">
+          <h2 className="text-white mb-8 text-2xl font-bold dark:text-text">NOSSOS SERVIÇOS</h2>
           <div className="flex flex-wrap gap-6">
-            <div className="rounded outline-4 outline-offset-2 bg-white border p-10 shadow-lg text-justify">
+            <div className="rounded outline-4 outline-offset-2 bg-white dark:bg-gray-800 border p-10 shadow-lg text-justify">
               <Image
                 src="/partners/suporte.svg"
                 alt="Suporte técnico"
@@ -27,7 +27,7 @@ export default function Services() {
               <p>Atendimento rápido e especializado para sua empresa. Nosso suporte pode ser remotamente ou presencial, nas proximidades da sede de nossa empresa.</p>
             </div>
 
-            <div className="rounded outline-4 outline-offset-2 bg-white border p-10 shadow-lg text-justify">
+            <div className="rounded outline-4 outline-offset-2 bg-white dark:bg-gray-800 border p-10 shadow-lg text-justify">
               <Image
                 src="/partners/servicos.svg"
                 alt="Serviços de TI"
@@ -39,7 +39,7 @@ export default function Services() {
               <p>Planejamento, orientação e preparação de documentos para Microempresas, principalmente no ramo de Drogarias ao que se refere a assuntos regulatórios junto a ANVISA. Troca de Responsabilidade técnica e legal, alterações de cadastro de Pessoas Física e Juídica, declaração de porte e outros serviços relacionados a Regulados.</p>
             </div>
 
-            <div className="rounded outline-4 outline-offset-2 bg-white border p-10 shadow-lg text-justify">
+            <div className="rounded outline-4 outline-offset-2 bg-white dark:bg-gray-800 border p-10 shadow-lg text-justify">
               <Image
                 src="/partners/automacao.svg"
                 alt="Suporte técnico"

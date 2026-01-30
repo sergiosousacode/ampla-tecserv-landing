@@ -4,7 +4,7 @@ import { APP } from "@/config/constants";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-200 text-gray-700 px-50 py-10">
+    <footer className="bg-bg text-gray-600 dark:text-text px-50 py-10">
         <div className="flex flex-col gap-8 text-center md:flex-row md:justify-between md:text-left">
           <div>
             <h2 className="font-bold mb-2">Entre em contato</h2>

@@ -1,9 +1,9 @@
-export default function Button_cta(){
+export default function Button_baixar(){
     return(
-        <a 
-        href="/contact" 
+        <a
+        href="#"
         className="rounded text-base bg-sky-600 px-8 py-3 text-white hover:bg-sky-700 transition"
-                   >Fale com nosso time!
+                   >Baixar Acesso remoto
         </a>
     )
 }

@@ -5,19 +5,9 @@ export default function Button_wa(){
         <a 
         href={URLS.WHATSAPP}
           target="_blank"
-        className="rounded 
-                   max-w-3xs 
-                   text-2 
-                   bg-sky-300 
-                   px-4 
-                   py-2 
-                   text-white 
-                   text-lg
-                   hover:bg-sky-700
-                   text-center
-                   mr-10
-                   "
-                   >Whatsapp
-        </a>
+          rel="noopener noreferrer"
+        className="inline-block rounded text-base bg-sky-600 px-6 py-2 text-white hover:bg-sky-700 transition"
+        aria-label="Abrir WhatsApp"
+        >Whatsapp</a>
     )
 }
