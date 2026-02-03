@@ -28,7 +28,7 @@ export default function Contact() {
 
             <div className="mt-10 h-[350px] w-full max-w-5xl overflow-hidden rounded-lg mx-auto">
               <iframe
-                src="https://www.google.com/maps?q=R.%Severino Nicolau%de%Melo,420&output=embed"
+                src="https://www.google.com/maps?q=R.%20Severino%20Nicolau%20de%20Melo,%20420&output=embed"
                 width="100%"
                 height="100%"
                 loading="lazy"
