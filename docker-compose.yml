@@ -6,13 +6,20 @@ services:
     image: ampla-tec-landing
     build:
       context: .
+      dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_FACEBOOK: ${NEXT_PUBLIC_FACEBOOK}
         NEXT_PUBLIC_INSTAGRAM: ${NEXT_PUBLIC_INSTAGRAM}
         NEXT_PUBLIC_LINKEDIN: ${NEXT_PUBLIC_LINKEDIN}
         NEXT_PUBLIC_WHATSAPP: ${NEXT_PUBLIC_WHATSAPP}
         NEXT_PUBLIC_EMAIL: ${NEXT_PUBLIC_EMAIL}
-    env_file: .env
+    environment:
+      NEXT_PUBLIC_FACEBOOK: ${NEXT_PUBLIC_FACEBOOK}
+      NEXT_PUBLIC_INSTAGRAM: ${NEXT_PUBLIC_INSTAGRAM}
+      NEXT_PUBLIC_LINKEDIN: ${NEXT_PUBLIC_LINKEDIN}
+      NEXT_PUBLIC_WHATSAPP: ${NEXT_PUBLIC_WHATSAPP}
+      NEXT_PUBLIC_EMAIL: ${NEXT_PUBLIC_EMAIL}
+      NODE_ENV: production
     expose:
       - "3000"
     restart: unless-stopped
@@ -20,7 +27,7 @@ services:
       - webnet
 
   nginx:
-    image: nginx:latest
+    image: nginx:1.27-alpine
     container_name: nginx
     ports:
       - "80:80"
