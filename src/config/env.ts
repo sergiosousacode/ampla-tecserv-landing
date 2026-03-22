@@ -1,15 +1,26 @@
-function required(name: string, value?: string){
-    if (!value){
-        throw new Error(`Variável de ambiente ausente: ${name}`);
-
-    }
-    return value;
+function getEnv(value: string | undefined, fallback: string) {
+  return value && value.trim() !== "" ? value : fallback;
 }
 
 export const ENV = {
-    FACEBOOK: required("NEXT_PUBLIC_FACEBOOK", process.env.NEXT_PUBLIC_FACEBOOK),
-    INSTAGRAM: required("NEXT_PUBLIC_INSTAGRAM", process.env.NEXT_PUBLIC_INSTAGRAM),
-    LINKEDIN: required("NEXT_PUBLIC_LINKEDIN", process.env.NEXT_PUBLIC_LINKEDIN),
-    WHATSAPP: required("NEXT_PUBLIC_WHATSAPP", process.env.NEXT_PUBLIC_WHATSAPP),
-    EMAIL: required("NEXT_PUBLIC_EMAIL", process.env.NEXT_PUBLIC_EMAIL),
-}
+  FACEBOOK: getEnv(
+    process.env.NEXT_PUBLIC_FACEBOOK,
+    "https://www.facebook.com/profile.php?id=61586066113887"
+  ),
+  INSTAGRAM: getEnv(
+    process.env.NEXT_PUBLIC_INSTAGRAM,
+    "https://www.instagram.com/ampla_tecserv"
+  ),
+  LINKEDIN: getEnv(
+    process.env.NEXT_PUBLIC_LINKEDIN,
+    "https://www.linkedin.com/company/ampla-tecserv"
+  ),
+  WHATSAPP: getEnv(
+    process.env.NEXT_PUBLIC_WHATSAPP,
+    "https://wa.me/5583993711271"
+  ),
+  EMAIL: getEnv(
+    process.env.NEXT_PUBLIC_EMAIL,
+    "amplatecserv@gmail.com"
+  ),
+};
