@@ -9,13 +9,29 @@ export const metadata = {
 
 export default function About() {
   return (
-    <Wrapper className="bg-sky-500 min-h-screen px-50 dark:bg-bg">
+    <Wrapper className="min-h-screen bg-sky-500 dark:bg-bg">
       <MaxWidth>
-        <section className="mx-auto px-4 text-center md:text-center py-25">
-          <h2 className="text-3xl text-white mb-4 font-bold dark:text-text">UM POUCO DE NOSSA TRAJETÓRIA</h2>
-            <p className="mx-auto max-w-2xl text-justify">
-              A Ampla TecServ começou sua história em 2014, no estado de Pernambuco. No início, atuávamos com assessoria farmacêutica para drogarias, incluindo o suporte ao SNGPC, sistema responsável pelo envio dos arquivos XML para a ANVISA.<br/><br/>Com o passar do tempo, ampliamos nossa atuação e passamos a oferecer softwares de automação comercial de baixo custo, pensados especialmente para pequenos empreendimentos — tanto drogarias quanto outros tipos de comércios.<br/><br/>Hoje, estamos sediados no estado da Paraíba e trabalhamos com softwares homologados e meios de pagamento que facilitam o dia a dia dos nossos clientes, além de trazer mais segurança e aumento no faturamento.<br/><br/>Contamos com parceiros comerciais que fornecem alguns dos melhores softwares homologados do país. Somando a isso, temos uma equipe de profissionais qualificados, pronta para oferecer suporte sempre que necessário.<br/><br/>Nossa trajetória sempre foi construída no boca a boca e na qualidade dos serviços prestados. Atuamos com assessoria farmacêutica para drogarias em todo o Brasil, transmitindo confiança e segurança. Crescemos junto com nossos clientes e parceiros, mostrando que é possível evoluir com quem entende do assunto.
+        <section className="mx-auto py-12 text-center sm:py-16 lg:py-20">
+          <h2 className="mb-6 text-2xl font-bold text-white dark:text-text sm:text-3xl">
+            UM POUCO DE NOSSA TRAJETORIA
+          </h2>
+          <div className="mx-auto max-w-3xl space-y-4 text-justify text-base leading-7 dark:text-text sm:text-lg">
+            <p>
+              A Ampla TecServ comecou sua historia em 2014, no estado de Pernambuco. No inicio, atuavamos com assessoria farmaceutica para drogarias, incluindo o suporte ao SNGPC, sistema responsavel pelo envio dos arquivos XML para a ANVISA.
             </p>
+            <p>
+              Com o passar do tempo, ampliamos nossa atuacao e passamos a oferecer softwares de automacao comercial de baixo custo, pensados especialmente para pequenos empreendimentos, tanto drogarias quanto outros tipos de comercios.
+            </p>
+            <p>
+              Hoje, estamos sediados no estado da Paraiba e trabalhamos com softwares homologados e meios de pagamento que facilitam o dia a dia dos nossos clientes, alem de trazer mais seguranca e aumento no faturamento.
+            </p>
+            <p>
+              Contamos com parceiros comerciais que fornecem alguns dos melhores softwares homologados do pais. Somando a isso, temos uma equipe de profissionais qualificados, pronta para oferecer suporte sempre que necessario.
+            </p>
+            <p>
+              Nossa trajetoria sempre foi construida no boca a boca e na qualidade dos servicos prestados. Atuamos com assessoria farmaceutica para drogarias em todo o Brasil, transmitindo confianca e seguranca. Crescemos junto com nossos clientes e parceiros, mostrando que e possivel evoluir com quem entende do assunto.
+            </p>
+          </div>
         </section>
       </MaxWidth>
     </Wrapper>

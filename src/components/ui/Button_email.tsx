@@ -4,7 +4,7 @@ export default function Button_email() {
   return (
     <a
       href={URLS.EMAIL}
-      className="inline-block rounded text-base bg-sky-600 px-6 py-2 text-white hover:bg-sky-700 transition ml-4"
+      className="inline-flex w-full items-center justify-center rounded bg-sky-600 px-6 py-3 text-base text-white transition hover:bg-sky-700 sm:w-auto"
       aria-label="Enviar email"
     >
       Enviar Email

@@ -41,11 +41,13 @@ html {
   scroll-behavior: smooth;
 }
 
-/* body {
-  @apply text-slate-900 antialiased;
+* {
   box-sizing: border-box;
-} */
+}
 
+body {
+  overflow-x: hidden;
+}
 
 
 

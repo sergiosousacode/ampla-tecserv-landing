@@ -11,21 +11,23 @@ export const metadata = {
 
 export default function Contact() {
   return (
-    <Wrapper className="bg-sky-500 min-h-screen px-50 dark:bg-bg">
+    <Wrapper className="min-h-screen bg-sky-500 dark:bg-bg">
       <MaxWidth>
         <section className="text-center">
-          <div className="mx-auto px-4 py-25">
-            <h2 className="text-white mb-4 text-3xl font-bold dark:text-text">
+          <div className="mx-auto py-12 sm:py-16 lg:py-20">
+            <h2 className="mb-4 text-2xl font-bold text-white dark:text-text sm:text-3xl">
               PRECISA DE SUPORTE CONFIÁVEL?
             </h2>
 
-            <p className="mb-8 text-2xl justify-center">
+            <p className="mx-auto mb-8 max-w-2xl text-base leading-7 sm:text-lg">
               Fale com a Ampla TecServ e encontre a solução ideal para sua empresa.
             </p>
-            <Button_wa />
-            <Button_email />
+            <div className="flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
+              <Button_wa />
+              <Button_email />
+            </div>
 
-            <div className="mt-10 h-[350px] w-full max-w-5xl overflow-hidden rounded-lg mx-auto">
+            <div className="mx-auto mt-10 h-[280px] w-full max-w-5xl overflow-hidden rounded-lg sm:h-[350px]">
               <iframe
                 src="https://www.google.com/maps?q=R.%20Severino%20Nicolau%20de%20Melo,%20420&output=embed"
                 width="100%"

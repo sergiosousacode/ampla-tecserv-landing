@@ -4,11 +4,11 @@ import { APP } from "@/config/constants";
 
 export default function Footer() {
   return (
-    <footer className="bg-bg text-gray-600 dark:text-text px-50 py-10">
-        <div className="flex flex-col gap-8 text-center md:flex-row md:justify-between md:text-left">
+    <footer className="bg-bg py-10 text-gray-600 dark:text-text">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 text-center sm:px-6 md:flex-row md:justify-between md:text-left lg:px-8">
           <div>
             <h2 className="font-bold mb-2">Entre em contato</h2>
-            <p>
+            <p className="leading-7">
               Rua Severino Nicolau de Melo, 420 Sala 207 B
               <br />
               CAXPST 884, Jardim Oceania - João Pessoa/PB
@@ -63,7 +63,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="md:self-end text-sm">
+          <div className="text-sm md:self-end">
             <p>©{new Date().getFullYear()} <b>{APP.NAME} </b>. v{APP.VERSION}<br />
             <b>Todos os direitos reservados.</b></p>
           </div>

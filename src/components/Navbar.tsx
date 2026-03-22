@@ -10,8 +10,8 @@ export function Navbar() {
   const { dark, toggleTheme } = useTheme(); // 👈 vem do contexto
 
   return (
-    <nav className="text-text border-b border-b">
-      <div className="mx-auto px-4 flex items-center justify-between h-20 py-4 max-w-7xl">
+    <nav className="border-b text-text">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
@@ -46,7 +46,9 @@ export function Navbar() {
         {/* Botão hamburger */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-2xl"
+          className="text-2xl md:hidden"
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={open}
         >
           ☰
         </button>
@@ -54,17 +56,17 @@ export function Navbar() {
 
       {/* Menu mobile */}
       <ul
-        className={`md:hidden transition-all duration-300 overflow-hidden ${
-          open ? "max-h-60 py-4" : "max-h-0"
+        className={`mx-auto max-w-7xl overflow-hidden px-4 transition-all duration-300 sm:px-6 lg:px-8 md:hidden ${
+          open ? "max-h-80 pb-4" : "max-h-0"
         }`}
       >
-        <li><Link href="/" onClick={() => setOpen(false)}>Home</Link></li>
-        <li><Link href="/about" onClick={() => setOpen(false)}>Sobre</Link></li>
-        <li><Link href="/contact" onClick={() => setOpen(false)}>Contato</Link></li>
-        <li><Link href="/help" onClick={() => setOpen(false)}>Ajuda</Link></li>
+        <li><Link href="/" className="block py-3" onClick={() => setOpen(false)}>Home</Link></li>
+        <li><Link href="/about" className="block py-3" onClick={() => setOpen(false)}>Sobre</Link></li>
+        <li><Link href="/contact" className="block py-3" onClick={() => setOpen(false)}>Contato</Link></li>
+        <li><Link href="/help" className="block py-3" onClick={() => setOpen(false)}>Ajuda</Link></li>
 
         {/* 🌙 Toggle no mobile */}
-        <li className="mt-4 px-4">
+        <li className="mt-4 border-t pt-4">
           <button onClick={toggleTheme} className="text-xl">
             {dark ? "☀️ Tema claro" : "🌙 Tema escuro"}
           </button>

@@ -5,7 +5,7 @@ export default function Button_baixar(){
         disabled
         aria-disabled="true"
         title="Disponível em breve"
-        className="rounded text-base bg-slate-400 px-8 py-3 text-white transition cursor-not-allowed opacity-80"
+        className="w-full rounded bg-slate-400 px-6 py-3 text-sm text-white transition cursor-not-allowed opacity-80 sm:w-auto sm:px-8 sm:text-base"
                    >Baixar Acesso remoto (em breve)
         </button>
     )

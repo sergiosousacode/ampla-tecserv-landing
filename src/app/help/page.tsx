@@ -10,16 +10,18 @@ export const metadata = {
 
 export default function Help() {
   return (
-    <Wrapper className="bg-sky-500 min-h-screen px-50 dark:bg-bg">
+    <Wrapper className="min-h-screen bg-sky-500 dark:bg-bg">
       <MaxWidth>
-        <section className="mx-auto text-center py-16 px-4">
-          <h2 className="text-white mb-4 text-3xl font-bold dark:text-text">CENTRAL DE AJUDA</h2>
+        <section className="mx-auto py-12 text-center sm:py-16 lg:py-20">
+          <h2 className="mb-4 text-2xl font-bold text-white dark:text-text sm:text-3xl">CENTRAL DE AJUDA</h2>
 
-            <p className="mb-8 text-2xl">
-              Já é cliente? Abra um chamado no nosso helpdesk.
-            </p>
+          <p className="mx-auto mb-8 max-w-2xl text-base leading-7 sm:text-lg">
+            Já é cliente? Abra um chamado no nosso helpdesk.
+          </p>
 
+          <div className="flex justify-center">
             <Button_baixar />
+          </div>
         </section>
       </MaxWidth>
     </Wrapper>
