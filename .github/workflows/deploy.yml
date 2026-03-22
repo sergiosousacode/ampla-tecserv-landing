@@ -24,6 +24,11 @@ jobs:
             git fetch --all
             git checkout main
             git pull origin main
+            export NEXT_PUBLIC_FACEBOOK='${{ vars.NEXT_PUBLIC_FACEBOOK }}'
+            export NEXT_PUBLIC_INSTAGRAM='${{ vars.NEXT_PUBLIC_INSTAGRAM }}'
+            export NEXT_PUBLIC_LINKEDIN='${{ vars.NEXT_PUBLIC_LINKEDIN }}'
+            export NEXT_PUBLIC_WHATSAPP='${{ vars.NEXT_PUBLIC_WHATSAPP }}'
+            export NEXT_PUBLIC_EMAIL='${{ vars.NEXT_PUBLIC_EMAIL }}'
             docker compose down
             docker compose build --no-cache
             docker compose up -d --force-recreate

@@ -4,7 +4,14 @@ services:
   web:
     container_name: ampla-landing
     image: ampla-tec-landing
-    build: .
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_FACEBOOK: ${NEXT_PUBLIC_FACEBOOK}
+        NEXT_PUBLIC_INSTAGRAM: ${NEXT_PUBLIC_INSTAGRAM}
+        NEXT_PUBLIC_LINKEDIN: ${NEXT_PUBLIC_LINKEDIN}
+        NEXT_PUBLIC_WHATSAPP: ${NEXT_PUBLIC_WHATSAPP}
+        NEXT_PUBLIC_EMAIL: ${NEXT_PUBLIC_EMAIL}
     env_file: .env
     expose:
       - "3000"
