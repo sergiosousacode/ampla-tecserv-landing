@@ -1,26 +1,22 @@
-import Container from "./Container";
+import Button_cta from "./ui/Button_cta";
+import { Wrapper } from "@/components/Layout/Wrapper";
+import { MaxWidth } from "@/components/Layout/MaxWidth";
 
 export default function CTA() {
   return (
-    <section className="bg-blue-600 py-16 text-white text-center">
-      <Container className="text-center">
+    <MaxWidth>
+      <Wrapper className="bg-sky-500 py-16 px-4 rounded-lg dark:bg-bg">
+        <section className="text-center">
+            <h3 className="text-white mb-1 text-3xl font-bold p-1 dark:text-text">
+              PRONTO PARA MELHORAR A TECNOLOGIA DA SUA EMPRESA?
+            </h3>
 
-        <h3 className="mb-4 text-2xl font-bold p-4">
-          Pronto para melhorar a tecnologia da sua empresa?
-        </h3>
-
-        <p className="mb-8 text-lg">
-          Entre em contato agora e fale com nossa equipe.
-        </p>
-
-        <a
-          href="https://wa.me/83993711271"
-          target="_blank"
-          className="rounded bg-white px-8 py-4 text-blue-600 font-bold hover:bg-gray-100 shadow-2xl"
-        >
-          WhatsApp Comercial
-        </a>
-      </Container>
-    </section>
+            <p className="mb-8 text-2xl px-4">
+              Entre em contato agora e fale com nossa equipe.
+            </p>
+            <Button_cta />
+        </section>
+      </Wrapper>
+    </MaxWidth>
   );
 }

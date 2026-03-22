@@ -1,7 +1,8 @@
 import "./globals.css";
-import Header from "@/components/Header";
+import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 
 export const metadata = {
@@ -26,12 +27,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
-      <body>
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <WhatsAppFloat />
-        <Footer />
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className="bg-bg text-text transition-colors duration-300">
+        <ThemeProvider>
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <WhatsAppFloat />
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
