@@ -1,4 +1,12 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bg: var(--bg);
+  --color-text: var(--text);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+}
 
 :root {
   --background: #ffffff;
@@ -10,22 +18,25 @@
   --text-base: 1rem;
   --text-lg: 1.125rem;
   --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
 
   /* Cores */
   --bg: #ffffff;
   --text: #0f172a;
+  --primary: #00a5ef;
+  --secondary: #0084cc;
 }
 .dark {
   --bg: #020617;
   --text: #e5e7eb;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 html {
   scroll-behavior: smooth;
 }
@@ -34,8 +45,6 @@ html {
   @apply text-slate-900 antialiased;
   box-sizing: border-box;
 } */
-
-
 
 
 

@@ -51,3 +51,4 @@ certbot/
 cerbot/
 nginx/
 site.conf
+.vscode/

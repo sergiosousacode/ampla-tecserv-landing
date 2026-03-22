@@ -1,4 +1,3 @@
-import { URLS } from "@/config/urls";
 import { Wrapper } from "@/components/Layout/Wrapper";
 import { MaxWidth } from "@/components/Layout/MaxWidth";
 import Button_wa from "@/components/ui/Button_wa";

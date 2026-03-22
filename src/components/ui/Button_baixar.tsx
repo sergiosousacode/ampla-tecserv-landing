@@ -1,9 +1,12 @@
 export default function Button_baixar(){
     return(
-        <a
-        href="#"
-        className="rounded text-base bg-sky-600 px-8 py-3 text-white hover:bg-sky-700 transition"
-                   >Baixar Acesso remoto
-        </a>
+        <button
+        type="button"
+        disabled
+        aria-disabled="true"
+        title="Disponível em breve"
+        className="rounded text-base bg-slate-400 px-8 py-3 text-white transition cursor-not-allowed opacity-80"
+                   >Baixar Acesso remoto (em breve)
+        </button>
     )
 }

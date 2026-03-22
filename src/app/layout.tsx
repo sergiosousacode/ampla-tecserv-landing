@@ -27,14 +27,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
-      <body className="bg-bg text-text">
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className="bg-bg text-text transition-colors duration-300">
         <ThemeProvider>
           <Navbar />
-            <main className="min-h-screen">{children}</main>
-            <WhatsAppFloat />
-            <Footer />
-          </ThemeProvider>
+          <main className="min-h-screen">{children}</main>
+          <WhatsAppFloat />
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
