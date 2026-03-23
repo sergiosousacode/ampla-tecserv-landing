@@ -29,6 +29,7 @@ export function Navbar() {
           <li><Link href="/" className="hover:text-sky-600">Home</Link></li>
           <li><Link href="/about" className="hover:text-sky-600">Sobre</Link></li>
           <li><Link href="/contact" className="hover:text-sky-600">Contato</Link></li>
+          <li><Link href="/portal-servicos" className="hover:text-sky-600">Portal de Serviços</Link></li>
           <li><Link href="/help" className="hover:text-sky-600">Ajuda</Link></li>
 
           {/* 🌙 Toggle Dark Mode */}
@@ -63,6 +64,7 @@ export function Navbar() {
         <li><Link href="/" className="block py-3" onClick={() => setOpen(false)}>Home</Link></li>
         <li><Link href="/about" className="block py-3" onClick={() => setOpen(false)}>Sobre</Link></li>
         <li><Link href="/contact" className="block py-3" onClick={() => setOpen(false)}>Contato</Link></li>
+        <li><Link href="/portal-servicos" className="block py-3" onClick={() => setOpen(false)}>Portal de Serviços</Link></li>
         <li><Link href="/help" className="block py-3" onClick={() => setOpen(false)}>Ajuda</Link></li>
 
         {/* 🌙 Toggle no mobile */}

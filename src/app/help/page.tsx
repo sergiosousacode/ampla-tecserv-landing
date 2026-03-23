@@ -11,17 +11,51 @@ export const metadata = {
 export default function Help() {
   return (
     <Wrapper className="min-h-screen bg-sky-500 dark:bg-bg">
-      <MaxWidth>
-        <section className="mx-auto py-12 text-center sm:py-16 lg:py-20">
-          <h2 className="mb-4 text-2xl font-bold text-white dark:text-text sm:text-3xl">CENTRAL DE AJUDA</h2>
+      <MaxWidth className="py-12 sm:py-16 lg:py-20">
+        <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="rounded-[2rem] bg-white/10 p-6 text-white shadow-xl ring-1 ring-white/20 backdrop-blur sm:p-8 lg:p-10 dark:bg-white/5 dark:text-text">
+            <span className="inline-flex rounded-full border border-white/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-white/80 dark:text-text">
+              Suporte ativo
+            </span>
 
-          <p className="mx-auto mb-8 max-w-2xl text-base leading-7 sm:text-lg">
-            Já é cliente? Abra um chamado no nosso helpdesk.
-          </p>
+            <h1 className="mt-5 text-3xl font-bold leading-tight sm:text-4xl">
+              CENTRAL DE AJUDA
+            </h1>
 
-          <div className="flex justify-center">
-            <Button_baixar />
+            <p className="mt-5 max-w-3xl text-base leading-7 text-white/85 sm:text-lg dark:text-text">
+              Se você já e cliente, esta e a porta de entrada para registrar sua
+              demandas, organizar o atendimento e acelerar o suporte técnico da
+              sua demanda.
+            </p>
+
+            <div className="mt-8">
+              <Button_baixar />
+            </div>
           </div>
+
+          <aside className="rounded-[2rem] bg-white p-6 text-slate-900 shadow-xl ring-1 ring-slate-200 sm:p-8 dark:bg-slate-900 dark:text-text dark:ring-white/10">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-300">
+              Como esta área ajuda
+            </p>
+
+            <div className="mt-6 space-y-4">
+              <div className="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 dark:bg-slate-950/50 dark:ring-white/10">
+                <h2 className="text-lg font-semibold">Abrir chamado com contexto</h2>
+                <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
+                  Informe o problema, prioridade e detalhes técnicos para reduzir
+                  retrabalho e acelerar o ínicio do seu atendimento.
+                </p>
+              </div>
+
+              <div className="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 dark:bg-slate-950/50 dark:ring-white/10">
+                <h2 className="text-lg font-semibold">Acompanhar a execução</h2>
+                <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
+                  Use o helpdesk como ponto central para acesso remoto, nós verificamos suas
+                  pendencias e os próximos passos de sua solução.
+                </p>
+              </div>
+            </div>
+          </aside>
         </section>
       </MaxWidth>
     </Wrapper>
