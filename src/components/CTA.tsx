@@ -7,7 +7,7 @@ export default function CTA() {
     <MaxWidth>
       <Wrapper className="bg-sky-500 py-16 px-4 rounded-lg dark:bg-bg">
         <section className="text-center">
-            <h3 className="text-white mb-1 text-3xl font-bold p-1 dark:text-text">
+            <h3 className="text-white mb-6 text-2xl font-bold p-1 dark:text-text">
               PRONTO PARA MELHORAR A TECNOLOGIA DA SUA EMPRESA?
             </h3>
 

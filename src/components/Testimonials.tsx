@@ -4,7 +4,7 @@ import { TESTIMONIALS } from "@/data/testimonials";
 export default function Testimonials() {
   return (
     <section className="flex flex-col justify-around py-16">
-      <h3 className="text-white mb-10 text-center text-3xl font-bold dark:text-text">
+      <h3 className="text-white mb-6 text-center text-2xl font-bold dark:text-text">
         O QUE DIZEM NOSSOS CLIENTES!
       </h3>
 
