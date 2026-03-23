@@ -20,7 +20,7 @@ export default function Home() {
                 NOSSOS PARCEIROS COMERCIAIS
             </h3>
 
-            <p className="mb-8 text-base leading-7 text-left dark:text-text sm:text-lg">
+            <p className="mb-8 text-base leading-7 text-justify dark:text-text sm:text-lg">
                 Trabalhamos com parceiros comerciais de renome para garantir que nossos clientes recebam as melhores soluções e serviços disponíveis no mercado. Nossa rede de parceiros nos permite oferecer uma ampla gama de tecnologias e expertise para atender às necessidades específicas de cada cliente.
             </p>
 

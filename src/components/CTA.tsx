@@ -11,7 +11,7 @@ export default function CTA() {
               PRONTO PARA MELHORAR A TECNOLOGIA DA SUA EMPRESA?
             </h3>
 
-            <p className="mb-8 text-2xl px-4">
+            <p className="mb-8 leading-7 px-4 sm:text-lg">
               Entre em contato agora e fale com nossa equipe.
             </p>
             <Button_cta />

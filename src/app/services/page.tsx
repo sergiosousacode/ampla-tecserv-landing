@@ -24,7 +24,7 @@ export default function Services() {
                 className="mx-auto mb-4 h-auto w-20 rounded-full sm:w-[100px]"
               />
               <h3 className="mb-3 text-lg font-bold text-slate-900 dark:text-white">Suporte Tecnico</h3>
-              <p className="text-sm leading-6 text-slate-700 dark:text-slate-200 sm:text-base">
+              <p className="text-sm leading-7 text-slate-700 dark:text-slate-200 sm:text-base">
                 Atendimento rapido e especializado para sua empresa. Nosso suporte pode ser remoto ou presencial, nas proximidades da sede da empresa.
               </p>
             </div>
@@ -53,7 +53,7 @@ export default function Services() {
               />
               <h3 className="mb-3 text-lg font-bold text-slate-900 dark:text-white">Automacao comercial</h3>
               <p className="text-sm leading-6 text-slate-700 dark:text-slate-200 sm:text-base">
-                Estruturacao de rede servidor e terminal para pequenos comercios, com softwares homologados em todo o Brasil e meios de pagamento TEF para adequacao da emissao de notas vinculadas a NFC-e do estado.
+                Estruturacao de rede servidor e terminal para pequenos comércios, com softwares homologados em todo o Brasil e meios de pagamento TEF para adequacao da emissao de notas vinculadas a NFC-e do estado.
               </p>
             </div>
           </div>
