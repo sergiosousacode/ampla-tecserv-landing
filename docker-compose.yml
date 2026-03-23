@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   web:
     container_name: ampla-landing
@@ -13,6 +11,8 @@ services:
         NEXT_PUBLIC_LINKEDIN: ${NEXT_PUBLIC_LINKEDIN}
         NEXT_PUBLIC_WHATSAPP: ${NEXT_PUBLIC_WHATSAPP}
         NEXT_PUBLIC_EMAIL: ${NEXT_PUBLIC_EMAIL}
+      env_file:
+        - .env
     environment:
       NEXT_PUBLIC_FACEBOOK: ${NEXT_PUBLIC_FACEBOOK}
       NEXT_PUBLIC_INSTAGRAM: ${NEXT_PUBLIC_INSTAGRAM}
