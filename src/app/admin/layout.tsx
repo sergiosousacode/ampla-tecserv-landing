@@ -18,10 +18,10 @@ export default async function AdminLayout({
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-sky-300">
-                Area administrativa
+                Área administrativa
               </p>
               <h1 className="mt-2 text-2xl font-bold sm:text-3xl">
-                Portal de servicos da Ampla TecServ
+                Portal de serviços da Ampla TecServ
               </h1>
               <p className="mt-2 text-sm text-slate-300">
                 Logado como {user.name} ({user.email})
@@ -39,13 +39,13 @@ export default async function AdminLayout({
                 href="/admin/usuarios"
                 className="rounded-full border border-white/15 px-4 py-2 transition hover:bg-white/10"
               >
-                Usuarios
+                Usuários
               </Link>
               <Link
                 href="/admin/servicos"
                 className="rounded-full border border-white/15 px-4 py-2 transition hover:bg-white/10"
               >
-                Servicos
+                Serviços
               </Link>
               <Link
                 href="/admin/contratos"

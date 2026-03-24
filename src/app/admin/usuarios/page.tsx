@@ -5,13 +5,13 @@ export default function AdminUsersPage() {
     <section className="grid gap-6">
       <div className="rounded-[1.5rem] bg-white p-6 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-text dark:ring-white/10">
         <p className="text-sm font-semibold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-300">
-          Cadastro de usuarios
+          Cadastro de usuários
         </p>
         <h2 className="mt-3 text-2xl font-bold">Controle de acesso administrativo</h2>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-700 dark:text-slate-300">
-          Esta area foi preparada para centralizar administradores, operacao
-          interna e, numa proxima fase, usuarios do tipo cliente com acesso
-          restrito aos proprios contratos e chamados.
+          Esta área foi preparada para centralizar administradores, operação
+          interna e, numa próxima fase, usuários do tipo cliente com acesso
+          restrito aos próprios contratos e chamados.
         </p>
       </div>
 
@@ -45,16 +45,16 @@ export default function AdminUsersPage() {
         <article className="rounded-[1.5rem] bg-white/5 p-5 ring-1 ring-white/10">
           <h3 className="text-lg font-semibold text-white">Arquivos que entram aqui</h3>
           <p className="mt-2 text-sm leading-6 text-slate-300">
-            O proximo passo natural e criar formularios de criacao, edicao e
-            redefinicao de senha, alem de politicas de permissao por perfil.
+            O próximo passo natural e criar formulários de crição, edição e
+            redefinicao de senha, alem de politicas de permissão por perfil.
           </p>
         </article>
 
         <article className="rounded-[1.5rem] bg-white/5 p-5 ring-1 ring-white/10">
           <h3 className="text-lg font-semibold text-white">Campos recomendados</h3>
           <p className="mt-2 text-sm leading-6 text-slate-300">
-            Nome, e-mail, perfil, empresa vinculada, status, ultimo acesso e
-            historico de alteracoes administrativas.
+            Nome, e-mail, perfil, empresa vinculada, status, último acesso e
+            histórico de alterações administrativas.
           </p>
         </article>
       </div>

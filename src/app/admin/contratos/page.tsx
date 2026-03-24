@@ -8,11 +8,11 @@ export default function AdminContractsPage() {
           Contratos e documentos
         </p>
         <h2 className="mt-3 text-2xl font-bold">
-          Elaboracao, PDF e compartilhamento
+          Elaboração, PDF e compartilhamento
         </h2>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-700 dark:text-slate-300">
-          Aqui voce organiza a geracao de contratos por cliente, acompanha status,
-          define o canal de envio e prepara a proxima etapa de impressao ou
+          Aqui voce organiza a geração de contratos por cliente, acompanha status,
+          define o canal de envio e prepara a próxima etapa de impressão ou
           exportacao em PDF.
         </p>
       </div>
@@ -50,7 +50,7 @@ export default function AdminContractsPage() {
           <h3 className="text-lg font-semibold text-white">Arquivos e recursos</h3>
           <p className="mt-2 text-sm leading-6 text-slate-300">
             O passo seguinte e criar um editor de contratos, templates com dados
-            variaveis e uma funcao de exportacao para PDF antes do envio.
+            variáveis e uma função de exportação para PDF antes do envio.
           </p>
         </article>
 
@@ -58,7 +58,7 @@ export default function AdminContractsPage() {
           <h3 className="text-lg font-semibold text-white">Canais de entrega</h3>
           <p className="mt-2 text-sm leading-6 text-slate-300">
             O contrato pode ser compartilhado por e-mail, WhatsApp ou dentro do
-            proprio portal, conforme o perfil de cada cliente.
+            próprio portal, conforme o perfil de cada cliente.
           </p>
         </article>
       </div>

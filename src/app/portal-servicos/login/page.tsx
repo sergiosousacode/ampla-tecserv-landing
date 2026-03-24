@@ -21,33 +21,33 @@ export default function PortalLoginPage() {
             </span>
 
             <h1 className="mt-5 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-              Entre no portal para gerenciar usuarios, servicos e contratos.
+              Entre no portal para gerenciar usuários, serviços e contratos.
             </h1>
 
             <p className="mt-5 max-w-3xl text-base leading-7 text-white/85 sm:text-lg dark:text-text">
               Esta etapa foi preparada para o seu acesso interno. A partir daqui,
-              voce consegue evoluir o portal em tres frentes: autenticacao,
-              cadastro administrativo e fluxo de contratos com geracao de PDF e
+              você consegue evoluir o portal em três frentes: autenticação,
+              cadastro administrativo e fluxo de contratos com geração de PDF e
               compartilhamento.
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               <article className="rounded-2xl bg-slate-950/20 p-5 ring-1 ring-white/15 dark:bg-slate-900/40">
-                <h2 className="text-lg font-semibold">Usuarios</h2>
+                <h2 className="text-lg font-semibold">Usuários</h2>
                 <p className="mt-2 text-sm leading-6 text-white/80 dark:text-text">
-                  Controle de administradores, operacao e futuros clientes.
+                  Controle de administradores, operação e futuros clientes.
                 </p>
               </article>
               <article className="rounded-2xl bg-slate-950/20 p-5 ring-1 ring-white/15 dark:bg-slate-900/40">
-                <h2 className="text-lg font-semibold">Servicos</h2>
+                <h2 className="text-lg font-semibold">Serviços</h2>
                 <p className="mt-2 text-sm leading-6 text-white/80 dark:text-text">
-                  Catalogo de ofertas, categorias, precificacao e escopo.
+                  Catálogo de ofertas, categorias, precificacao e escopo.
                 </p>
               </article>
               <article className="rounded-2xl bg-slate-950/20 p-5 ring-1 ring-white/15 dark:bg-slate-900/40">
                 <h2 className="text-lg font-semibold">Contratos</h2>
                 <p className="mt-2 text-sm leading-6 text-white/80 dark:text-text">
-                  Elaboracao, exportacao em PDF e envio por e-mail, WhatsApp ou portal.
+                  Elaboração, exportação em PDF e envio por e-mail, WhatsApp ou portal.
                 </p>
               </article>
             </div>
@@ -67,8 +67,8 @@ export default function PortalLoginPage() {
             </div>
 
             <p className="mt-4 text-sm leading-6 text-slate-300">
-              O administrador inicial e criado pelo seed com base nas variaveis
-              de ambiente. Depois disso, este formulario autentica consultando o
+              O administrador inicial e criado pelo seed com base nas variáveis
+              de ambiente. Depois disso, este formulário autentica consultando o
               banco PostgreSQL.
             </p>
 
@@ -78,7 +78,7 @@ export default function PortalLoginPage() {
               <p className="text-sm font-semibold text-white">Fluxo previsto</p>
               <p className="mt-2 text-sm leading-6 text-slate-300">
                 Primeiro entra apenas o administrador. Depois, o mesmo fluxo pode
-                ser adaptado para clientes acompanharem servicos e chamados.
+                ser adaptado para clientes acompanharem serviços e chamados.
               </p>
             </div>
 
@@ -86,7 +86,7 @@ export default function PortalLoginPage() {
               href="/portal-servicos"
               className="mt-6 inline-flex text-sm font-semibold text-sky-300 transition hover:text-sky-200"
             >
-              Voltar para a apresentacao do portal
+              Voltar para a apresentação do portal
             </Link>
           </aside>
         </section>

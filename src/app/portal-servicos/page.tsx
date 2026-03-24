@@ -43,7 +43,7 @@ export default function Services() {
             </span>
 
             <h1 className="mt-5 max-w-3xl text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-              Uma base para você gerenciar contratos, servicos e futuros chamados dos clientes.
+              Uma base para você gerenciar contratos, serviços e futuros chamados dos clientes.
             </h1>
 
             <p className="mt-5 max-w-2xl text-base leading-7 text-white/85 sm:text-lg dark:text-text">
@@ -98,16 +98,16 @@ export default function Services() {
             </div>
 
             <p className="mt-4 text-sm leading-6 text-slate-300">
-              Esta pagina funciona como apresentacao do portal. O login real fica
-              na tela restrita e valida o e-mail e a senha no servidor.
+              Esta página funciona como apresentação do portal. O login real fica
+              na tela restrita e válida o e-mail e a senha no servidor.
             </p>
 
             <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-5">
               <p className="text-sm font-semibold text-white">Acesso administrativo</p>
               <p className="mt-2 text-sm leading-6 text-slate-300">
                 Para entrar no painel, siga para a tela de login protegida. Os
-                campos nao aparecem aqui para evitar a impressao de que esta pagina
-                ja autentica o acesso.
+                campos não aparecem aqui para evitar a impressao de que esta página
+                já autentica o acesso.
               </p>
 
               <Link
@@ -131,7 +131,7 @@ export default function Services() {
               href="/contact"
               className="mt-6 inline-flex text-sm font-semibold text-sky-300 transition hover:text-sky-200"
             >
-              Ajustar esse fluxo depois com integracao real
+              Ajustar esse fluxo depois com integração real
             </Link>
           </aside>
         </section>

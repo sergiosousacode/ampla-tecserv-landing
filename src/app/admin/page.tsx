@@ -7,12 +7,12 @@ import {
 
 const highlights = [
   {
-    label: "Usuarios cadastrados",
+    label: "Usuários cadastrados",
     value: String(portalUsers.length).padStart(2, "0"),
     description: "Administradores, operacao e futuros acessos de cliente.",
   },
   {
-    label: "Servicos no catalogo",
+    label: "Serviços no catálogo",
     value: String(serviceCatalog.length).padStart(2, "0"),
     description: "Itens que serao vendidos, contratados e executados.",
   },
@@ -64,7 +64,7 @@ export default function AdminDashboardPage() {
       <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
         <div className="rounded-[1.5rem] bg-white p-6 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-text dark:ring-white/10">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-300">
-            Proximos modulos
+            Próximos módulos
           </p>
           <div className="mt-5 grid gap-4 md:grid-cols-3">
             {quickActions.map((item) => (

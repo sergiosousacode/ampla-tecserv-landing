@@ -5,12 +5,12 @@ export default function AdminServicesPage() {
     <section className="grid gap-6">
       <div className="rounded-[1.5rem] bg-white p-6 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-text dark:ring-white/10">
         <p className="text-sm font-semibold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-300">
-          Catalogo de servicos
+          Catálogo de serviços
         </p>
-        <h2 className="mt-3 text-2xl font-bold">Estruture o que sera contratado</h2>
+        <h2 className="mt-3 text-2xl font-bold">Estruture o que será contratado</h2>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-700 dark:text-slate-300">
-          Este modulo prepara a sua base comercial e operacional. Cada servico
-          pode virar item contratavel, tipo de chamado, escopo padrao e modelo de
+          Este módulo prepara a sua base comercial e operacional. Cada serviço
+          pode virar item contratável, tipo de chamado, escopo padrao e modelo de
           atendimento dentro do portal.
         </p>
       </div>
@@ -43,8 +43,8 @@ export default function AdminServicesPage() {
       <div className="rounded-[1.5rem] bg-white/5 p-5 ring-1 ring-white/10">
         <h3 className="text-lg font-semibold text-white">O que adicionar depois</h3>
         <p className="mt-2 text-sm leading-6 text-slate-300">
-          Preco base, SLA, anexos, checklist de execucao, tipo de faturamento,
-          modelo de contrato vinculado e permissao para o cliente solicitar esse
+          Preço base, SLA, anexos, checklist de execução, tipo de faturamento,
+          modelo de contrato vinculado e permissão para o cliente solicitar esse
           servico pelo portal.
         </p>
       </div>

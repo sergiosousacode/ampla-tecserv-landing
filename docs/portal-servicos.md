@@ -127,7 +127,7 @@ src/
 
 ## Recursos que voce ainda vai precisar implementar
 
-- Banco de dados para usuarios, clientes, servicos e contratos
+- Banco de dados para usuarios, clientes, servicos e contratos [OK]
 - Controle de permissao por perfil alem do `ADMIN`
 - Editor de contrato com variaveis dinamicas
 - Exportacao e impressao de PDF
