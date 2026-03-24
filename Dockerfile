@@ -1,7 +1,9 @@
 # ===== STAGE 1: build =====
-FROM node:20.12-slim AS builder
+FROM node:20.19-slim AS builder
 
 WORKDIR /app
+
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 ARG NEXT_PUBLIC_FACEBOOK
 ARG NEXT_PUBLIC_INSTAGRAM
@@ -19,15 +21,18 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+RUN npx prisma generate
 RUN npm run build
 
 
 # ===== STAGE 2: produção =====
-FROM node:20.12-slim
+FROM node:20.19-slim
 
 WORKDIR /app
 
 ENV NODE_ENV=production
+
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 # copia somente o necessário
 COPY --from=builder /app/package*.json ./

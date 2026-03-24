@@ -1,4 +1,19 @@
 services:
+  db:
+    image: postgres:16-alpine
+    container_name: ampla-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-ampla_portal}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - webnet
+
   web:
     container_name: ampla-landing
     image: ampla-tec-landing
@@ -23,9 +38,15 @@ services:
       NEXT_PUBLIC_LINKEDIN: ${NEXT_PUBLIC_LINKEDIN:-}
       NEXT_PUBLIC_WHATSAPP: ${NEXT_PUBLIC_WHATSAPP:-}
       NEXT_PUBLIC_EMAIL: ${NEXT_PUBLIC_EMAIL:-}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:postgres@db:5432/ampla_portal?schema=public}
+      PORTAL_ADMIN_EMAIL: ${PORTAL_ADMIN_EMAIL:-}
+      PORTAL_ADMIN_PASSWORD: ${PORTAL_ADMIN_PASSWORD:-}
+      PORTAL_SESSION_SECRET: ${PORTAL_SESSION_SECRET:-}
 
     expose:
       - "3000"
+    depends_on:
+      - db
     restart: unless-stopped
     networks:
       - webnet
@@ -49,3 +70,6 @@ services:
 networks:
   webnet:
     driver: bridge
+
+volumes:
+  postgres_data:

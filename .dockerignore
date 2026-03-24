@@ -2,6 +2,10 @@ certbot
 nginx
 .git
 .gitignore
+.next
+coverage
+dist
+docs
 node_modules
 Dockerfile
 docker-compose.yml

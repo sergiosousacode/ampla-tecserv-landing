@@ -98,51 +98,25 @@ export default function Services() {
             </div>
 
             <p className="mt-4 text-sm leading-6 text-slate-300">
-              Use esta área como ponto de entrada da gestão operacional. Quando a
-              autenticação estiver conectada ao backend, este card já estara pronto
-              para receber o seu login administrativo.
+              Esta pagina funciona como apresentacao do portal. O login real fica
+              na tela restrita e valida o e-mail e a senha no servidor.
             </p>
 
-            <form className="mt-8 space-y-5">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="mb-2 block text-sm font-medium text-slate-200"
-                >
-                  E-mail administrativo
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="admin@amplatecserv.com.br"
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:bg-white/10"
-                />
-              </div>
+            <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p className="text-sm font-semibold text-white">Acesso administrativo</p>
+              <p className="mt-2 text-sm leading-6 text-slate-300">
+                Para entrar no painel, siga para a tela de login protegida. Os
+                campos nao aparecem aqui para evitar a impressao de que esta pagina
+                ja autentica o acesso.
+              </p>
 
-              <div>
-                <label
-                  htmlFor="password"
-                  className="mb-2 block text-sm font-medium text-slate-200"
-                >
-                  Senha
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="Sua senha de acesso"
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:bg-white/10"
-                />
-              </div>
-
-              <button
-                type="button"
-                className="w-full rounded-2xl bg-sky-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-300"
+              <Link
+                href="/portal-servicos/login"
+                className="mt-5 inline-flex w-full items-center justify-center rounded-2xl bg-sky-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-300"
               >
-                Entrar no portal
-              </button>
-            </form>
+                Ir para o login real
+              </Link>
+            </div>
 
             <div className="mt-8 rounded-2xl border border-dashed border-white/15 bg-white/5 p-4">
               <p className="text-sm font-semibold text-white">Estrutura planejada</p>
