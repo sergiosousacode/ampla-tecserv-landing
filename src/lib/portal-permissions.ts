@@ -1,6 +1,9 @@
 import { UserRole } from "@prisma/client";
 
-export const INTERNAL_PORTAL_ROLES = [UserRole.ADMIN, UserRole.OPERATIONAL];
+export const INTERNAL_PORTAL_ROLES: UserRole[] = [
+  UserRole.ADMIN,
+  UserRole.OPERATIONAL,
+];
 
 export function getPortalHomeByRole(role: UserRole) {
   switch (role) {
