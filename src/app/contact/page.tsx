@@ -50,7 +50,7 @@ export default function Contact() {
               </p>
               <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
                 Atendimento on-line, via acesso remoto ou presencialmente aos Estados da Paraiba e Pernambuco
-                e operacao adaptada à diferentes perfis de cliente.
+                e operação adaptada à diferentes perfis de cliente.
               </p>
             </div>
 

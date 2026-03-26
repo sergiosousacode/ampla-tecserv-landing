@@ -50,7 +50,7 @@ export default function ServiceOrderFinalizeForm({
       </label>
 
       <label className="grid gap-2 text-sm text-slate-700">
-        <span className="font-medium">Satisfacao do cliente</span>
+        <span className="font-medium">Satisfação do cliente</span>
         <select
           name="clientSatisfaction"
           defaultValue={clientSatisfaction ? String(clientSatisfaction) : "5"}

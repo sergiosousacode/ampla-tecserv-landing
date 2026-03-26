@@ -67,17 +67,17 @@ export default async function AdminContractsPage() {
         <article className="rounded-[1.5rem] bg-white/5 p-5 ring-1 ring-white/10">
           <h3 className="text-lg font-semibold text-white">MVP operacional</h3>
           <p className="mt-2 text-sm leading-6 text-slate-300">
-            Nesta fase o portal trabalha com ordem de servico em vez de contrato
-            formal. Isso reduz custo, evita complexidade juridica e acelera a
-            validacao do fluxo operacional.
+            Nesta fase o portal trabalha com ordem de serviço em vez de contrato
+            formal. Isso reduz custo, evita complexidade jurídica e acelera a
+            validação do fluxo operacional.
           </p>
         </article>
 
         <article className="rounded-[1.5rem] bg-white/5 p-5 ring-1 ring-white/10">
-          <h3 className="text-lg font-semibold text-white">Saida inicial</h3>
+          <h3 className="text-lg font-semibold text-white">Saída inicial</h3>
           <p className="mt-2 text-sm leading-6 text-slate-300">
-            A propria pagina salva no banco pode ser reaberta e impressa no
-            navegador. O PDF continua como uma evolucao posterior.
+            A própria página salva no banco pode ser reaberta e impressa no
+            navegador. O PDF continua como uma evolução posterior.
           </p>
         </article>
       </div>

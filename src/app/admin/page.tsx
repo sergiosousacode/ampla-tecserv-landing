@@ -5,12 +5,12 @@ import { getPrisma } from "@/lib/prisma";
 const quickActions = [
   {
     href: "/admin/usuarios",
-    title: "Cadastro de usuarios",
+    title: "Cadastro de usuários",
     description: "Controle acesso administrativo e prepare a futura area do cliente.",
   },
   {
     href: "/admin/servicos",
-    title: "Catalogo de servicos",
+    title: "Catálogo de serviços",
     description: "Estruture categorias, forma de cobranca e escopo de atendimento.",
   },
   {
@@ -20,7 +20,7 @@ const quickActions = [
   },
   {
     href: "/admin/contratos",
-    title: "Ordens de servico",
+    title: "Ordens de serviço",
     description: "Monte ordens dinamicas, salve no banco e imprima pelo navegador.",
   },
 ];
@@ -105,9 +105,9 @@ export default async function AdminDashboardPage() {
           </p>
           <ol className="mt-5 space-y-4 text-sm leading-6 text-slate-300">
             <li>1. Cadastrar administradores e definir quem pode operar o portal.</li>
-            <li>2. Montar o catalogo de servicos e a base de clientes.</li>
-            <li>3. Emitir ordens de servico dinamicas e salvar o historico no banco.</li>
-            <li>4. Reabrir a pagina da ordem sempre que precisar imprimir novamente.</li>
+            <li>2. Montar o catálogo de serviços e a base de clientes.</li>
+            <li>3. Emitir ordens de serviço dinâmicas e salvar o histórico no banco.</li>
+            <li>4. Reabrir a página da ordem sempre que precisar imprimir novamente.</li>
           </ol>
         </aside>
       </div>

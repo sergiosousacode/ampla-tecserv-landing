@@ -61,7 +61,7 @@ export default async function AdminLayout({
                 href="/admin/contratos"
                 className="rounded-full border border-white/15 px-4 py-2 transition hover:bg-white/10"
               >
-                Ordens de servico
+                Ordens de serviço
               </Link>
               <form action={logoutPortalAction}>
                 <button

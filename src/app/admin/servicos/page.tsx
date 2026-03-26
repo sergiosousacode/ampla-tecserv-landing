@@ -38,9 +38,9 @@ export default async function AdminServicesPage() {
       </div>
 
       <div className="rounded-[1.5rem] bg-white p-6 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-text dark:ring-white/10">
-        <h3 className="text-xl font-bold">Cadastrar servico</h3>
+        <h3 className="text-xl font-bold">Cadastrar serviço</h3>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-700 dark:text-slate-300">
-          Este cadastro passa a alimentar o editor de ordem de servico com dados
+          Este cadastro passa a alimentar o editor de ordem de serviço com dados
           reais. O escopo aqui ainda e enxuto para manter o MVP leve.
         </p>
 
@@ -79,7 +79,7 @@ export default async function AdminServicesPage() {
         <p className="mt-2 text-sm leading-6 text-slate-300">
           Preço base, SLA, anexos, checklist de execução, tipo de faturamento,
           modelo de contrato vinculado e permissão para o cliente solicitar esse
-          servico pelo portal.
+          serviço pelo portal.
         </p>
       </div>
     </section>

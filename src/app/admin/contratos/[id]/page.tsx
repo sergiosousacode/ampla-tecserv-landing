@@ -93,7 +93,7 @@ export default async function AdminServiceOrderDetailPage({
             </p>
             <h1 className="mt-2 text-3xl font-bold">{order.title}</h1>
             <p className="mt-3 text-sm leading-6 text-slate-600">
-              Cliente: {order.client.companyName} • Servico: {order.service.name}
+              Cliente: {order.client.companyName} • Serviço: {order.service.name}
             </p>
           </div>
 
@@ -177,11 +177,11 @@ export default async function AdminServiceOrderDetailPage({
         <div className="mt-8 grid gap-6 border-t border-slate-200 pt-6 print:hidden">
           <div className="rounded-[1.5rem] bg-slate-50 p-5 ring-1 ring-slate-200">
             <h3 className="text-lg font-semibold text-slate-900">
-              Finalizacao tecnica e satisfacao do cliente
+              Finalização técnica e satisfação do cliente
             </h3>
             <p className="mt-2 text-sm leading-6 text-slate-600">
               Use esta etapa para registrar o encerramento da OS, o parecer do
-              tecnico e a percepcao final do cliente sobre o atendimento.
+              técnico e a percepção final do cliente sobre o atendimento.
             </p>
 
             <div className="mt-5 grid gap-3 text-sm text-slate-700 md:grid-cols-3">
@@ -190,7 +190,7 @@ export default async function AdminServiceOrderDetailPage({
                 {statusLabel[order.status]}
               </p>
               <p>
-                <strong className="text-slate-900">Satisfacao:</strong>{" "}
+                <strong className="text-slate-900">Satisfação:</strong>{" "}
                 {order.clientSatisfaction ? `${order.clientSatisfaction}/5` : "-"}
               </p>
               <p>

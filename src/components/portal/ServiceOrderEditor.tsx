@@ -93,13 +93,13 @@ export default function ServiceOrderEditor({
     <section className="grid gap-6">
       <div className="rounded-[1.5rem] bg-white p-6 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-text dark:ring-white/10 print:hidden">
         <p className="text-sm font-semibold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-300">
-          Ordem de servico
+          Ordem de serviço
         </p>
         <h2 className="mt-3 text-2xl font-bold">
-          Editor dinamico com dados reais e impressao pelo navegador
+          Editor dinâmico com dados reais e impressão pelo navegador
         </h2>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-700 dark:text-slate-300">
-          O editor agora trabalha com clientes e servicos cadastrados no banco e
+          O editor agora trabalha com clientes e serviços cadastrados no banco e
           salva a ordem emitida para consulta e impressao posterior.
         </p>
       </div>
@@ -109,8 +109,8 @@ export default function ServiceOrderEditor({
           <div>
             <h3 className="text-lg font-semibold">Ordens salvas no banco</h3>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700 dark:text-slate-300">
-              Cada ordem criada aqui fica registrada com cliente, servico,
-              responsavel e data de atualizacao.
+              Cada ordem criada aqui fica registrada com cliente, serviço,
+              responsável e data de atualização.
             </p>
           </div>
 
@@ -151,7 +151,7 @@ export default function ServiceOrderEditor({
                       href={`/admin/contratos/${order.id}`}
                       className="rounded-full bg-sky-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-sky-600"
                     >
-                      Abrir pagina
+                      Abrir página
                     </Link>
                   </div>
                 </div>

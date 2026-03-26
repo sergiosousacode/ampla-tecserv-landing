@@ -51,7 +51,7 @@ export default function AdminServiceCreateForm() {
       </div>
 
       <label className="grid gap-2 text-sm text-slate-700 dark:text-slate-300">
-        <span className="font-medium">Descricao</span>
+        <span className="font-medium">Descrição</span>
         <textarea
           name="description"
           rows={4}
@@ -77,7 +77,7 @@ export default function AdminServiceCreateForm() {
         </label>
 
         <label className="grid gap-2 text-sm text-slate-700 dark:text-slate-300">
-          <span className="font-medium">Preco base</span>
+          <span className="font-medium">Preço base</span>
           <input
             name="basePrice"
             type="text"

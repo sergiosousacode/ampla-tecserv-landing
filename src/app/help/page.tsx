@@ -51,7 +51,7 @@ export default function Help() {
                 <h2 className="text-lg font-semibold">Acompanhar a execução</h2>
                 <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
                   Use o helpdesk como ponto central para acesso remoto, nós verificamos suas
-                  pendencias e os próximos passos de sua solução.
+                  pendências e os próximos passos de sua solução.
                 </p>
               </div>
             </div>

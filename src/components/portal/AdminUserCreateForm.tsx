@@ -106,7 +106,7 @@ export default function AdminUserCreateForm() {
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
-          Depois do cadastro, o usuario ja pode usar o login do portal com o
+          Depois do cadastro, o usuário já pode usar o login do portal com o
           e-mail e a senha inicial definidos aqui.
         </p>
 

@@ -148,7 +148,7 @@ export default function AdminUserManageCard({
           Redefinir senha
         </p>
         <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-          Use esta acao quando o usuario perder o acesso. A nova senha passa a
+          Use esta ação quando o usuário perder o acesso. A nova senha passa a
           valer imediatamente no login do portal.
         </p>
 

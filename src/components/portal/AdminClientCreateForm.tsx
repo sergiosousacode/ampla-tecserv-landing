@@ -46,7 +46,7 @@ export default function AdminClientCreateForm() {
 
       <div className="grid gap-4 md:grid-cols-3">
         <label className="grid gap-2 text-sm text-slate-700 dark:text-slate-300">
-          <span className="font-medium">Responsavel</span>
+          <span className="font-medium">Responsável</span>
           <input
             name="contactName"
             type="text"
