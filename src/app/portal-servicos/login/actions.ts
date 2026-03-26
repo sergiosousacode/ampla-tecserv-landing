@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import {
   clearPortalSession,
   createPortalSession,
+  getPortalRedirectForUser,
   validatePortalCredentials,
 } from "@/lib/portal-auth";
 
@@ -27,11 +28,11 @@ export async function loginPortalAction(
   const user = await validatePortalCredentials(email, password);
 
   if (!user) {
-    return { error: "Credenciais invalidas. Revise seu acesso administrativo." };
+    return { error: "Credenciais invalidas ou usuario sem acesso ativo ao portal." };
   }
 
   await createPortalSession(user.id);
-  redirect("/admin");
+  redirect(getPortalRedirectForUser(user.role));
 }
 
 export async function logoutPortalAction() {

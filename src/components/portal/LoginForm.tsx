@@ -8,11 +8,7 @@ import {
 
 const initialState: LoginFormState = {};
 
-export default function LoginForm({
-  defaultEmail,
-}: {
-  defaultEmail: string;
-}) {
+export default function LoginForm() {
   const [state, formAction, isPending] = useActionState(
     loginPortalAction,
     initialState
@@ -25,17 +21,17 @@ export default function LoginForm({
           htmlFor="email"
           className="mb-2 block text-sm font-medium text-slate-200"
         >
-          E-mail administrativo
+          E-mail de acesso
         </label>
         <input
           id="email"
           name="email"
           type="email"
-          placeholder="admin@amplatecserv.com.br"
+          placeholder="voce@empresa.com.br"
           className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:bg-white/10"
         />
         <p className="mt-2 text-xs text-slate-400">
-          Use o e-mail administrativo configurado para o portal: {defaultEmail}
+          Use o e-mail e a senha cadastrados por um administrador do portal.
         </p>
       </div>
 

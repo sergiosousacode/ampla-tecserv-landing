@@ -95,6 +95,10 @@ model Contract {
   pdfStatus      PdfStatus       @default(PENDING)
   sharingChannel SharingChannel  @default(PORTAL)
   pdfUrl         String?
+  completedAt    DateTime?
+  technicianFeedback String?
+  clientSatisfaction Int?
+  clientFeedback String?
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
   clientId       String

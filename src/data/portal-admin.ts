@@ -17,7 +17,14 @@ export const portalUsers: PortalUser[] = [
     name: "Equipe Operacional",
     email: "operacional@amplatecserv.com.br",
     role: "operacional",
-    status: "pendente",
+    status: "ativo",
+  },
+  {
+    id: "usr_client_1",
+    name: "Cliente Exemplo",
+    email: "cliente@empresa.com.br",
+    role: "cliente",
+    status: "ativo",
   },
 ];
 

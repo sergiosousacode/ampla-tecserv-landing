@@ -1,7 +1,19 @@
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient, UserRole, UserStatus } from "@prisma/client";
 
-const prisma = new PrismaClient();
+dotenv.config({ path: ".env.local" });
+dotenv.config();
+
+const databaseUrl = process.env.DATABASE_URL || process.env.DATABASE_URL_LOCAL;
+
+if (!databaseUrl) {
+  throw new Error("Configure DATABASE_URL ou DATABASE_URL_LOCAL antes do seed.");
+}
+
+const adapter = new PrismaPg({ connectionString: databaseUrl });
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   const email = (

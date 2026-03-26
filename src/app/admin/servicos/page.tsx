@@ -1,6 +1,28 @@
-import { serviceCatalog } from "@/data/portal-admin";
+import { BillingType, ServiceStatus } from "@prisma/client";
+import AdminServiceCreateForm from "@/components/portal/AdminServiceCreateForm";
+import { requirePortalAdminAccess } from "@/lib/portal-auth";
+import { getPrisma } from "@/lib/prisma";
 
-export default function AdminServicesPage() {
+const billingLabel: Record<BillingType, string> = {
+  MONTHLY: "Mensal",
+  ONE_OFF: "Avulso",
+  PROJECT: "Projeto",
+};
+
+const statusLabel: Record<ServiceStatus, string> = {
+  ACTIVE: "Ativo",
+  DRAFT: "Rascunho",
+  INACTIVE: "Inativo",
+};
+
+export default async function AdminServicesPage() {
+  await requirePortalAdminAccess();
+
+  const prisma = getPrisma();
+  const services = await prisma.service.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+
   return (
     <section className="grid gap-6">
       <div className="rounded-[1.5rem] bg-white p-6 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-text dark:ring-white/10">
@@ -15,8 +37,20 @@ export default function AdminServicesPage() {
         </p>
       </div>
 
+      <div className="rounded-[1.5rem] bg-white p-6 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-text dark:ring-white/10">
+        <h3 className="text-xl font-bold">Cadastrar servico</h3>
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-700 dark:text-slate-300">
+          Este cadastro passa a alimentar o editor de ordem de servico com dados
+          reais. O escopo aqui ainda e enxuto para manter o MVP leve.
+        </p>
+
+        <div className="mt-6">
+          <AdminServiceCreateForm />
+        </div>
+      </div>
+
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {serviceCatalog.map((service) => (
+        {services.map((service) => (
           <article
             key={service.id}
             className="rounded-[1.5rem] bg-white p-6 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-text dark:ring-white/10"
@@ -26,14 +60,14 @@ export default function AdminServicesPage() {
             </p>
             <h3 className="mt-3 text-xl font-bold">{service.name}</h3>
             <p className="mt-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
-              {service.summary}
+              {service.description}
             </p>
             <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.12em]">
               <span className="rounded-full bg-sky-100 px-3 py-1 text-sky-700 dark:bg-sky-400/15 dark:text-sky-300">
-                {service.billing}
+                {billingLabel[service.billingType]}
               </span>
               <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700 dark:bg-white/10 dark:text-slate-300">
-                {service.status}
+                {statusLabel[service.status]}
               </span>
             </div>
           </article>
