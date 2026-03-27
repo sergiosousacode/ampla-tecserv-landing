@@ -20,10 +20,43 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
             cd /home/ubuntu/ampla-tecserv-landing
             git fetch --all
             git checkout main
             git pull origin main
+
+            if [ ! -f .env ]; then
+              echo "Arquivo .env nao encontrado no servidor."
+              exit 1
+            fi
+
+            if ! grep -q '^DATABASE_URL=' .env; then
+              echo "DATABASE_URL nao encontrada no .env do servidor."
+              exit 1
+            fi
+
+            if ! grep -q '^PORTAL_ADMIN_EMAIL=' .env; then
+              echo "PORTAL_ADMIN_EMAIL nao encontrada no .env do servidor."
+              exit 1
+            fi
+
+            if ! grep -q '^PORTAL_ADMIN_PASSWORD=' .env; then
+              echo "PORTAL_ADMIN_PASSWORD nao encontrada no .env do servidor."
+              exit 1
+            fi
+
+            if ! grep -q '^PORTAL_SESSION_SECRET=' .env; then
+              echo "PORTAL_SESSION_SECRET nao encontrada no .env do servidor."
+              exit 1
+            fi
+
+            PORTAL_SESSION_SECRET_VALUE=$(grep '^PORTAL_SESSION_SECRET=' .env | tail -n 1 | cut -d '=' -f2-)
+            if [ ${#PORTAL_SESSION_SECRET_VALUE} -lt 32 ]; then
+              echo "PORTAL_SESSION_SECRET precisa ter pelo menos 32 caracteres no servidor."
+              exit 1
+            fi
+
             export NEXT_PUBLIC_FACEBOOK='${{ vars.NEXT_PUBLIC_FACEBOOK }}'
             export NEXT_PUBLIC_INSTAGRAM='${{ vars.NEXT_PUBLIC_INSTAGRAM }}'
             export NEXT_PUBLIC_LINKEDIN='${{ vars.NEXT_PUBLIC_LINKEDIN }}'
