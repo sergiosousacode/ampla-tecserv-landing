@@ -1,6 +1,8 @@
 import { BillingType, ServiceStatus } from "@prisma/client";
 import AdminServiceCreateForm from "@/components/portal/AdminServiceCreateForm";
+import AdminServiceManageCard from "@/components/portal/AdminServiceManageCard";
 import { requirePortalAdminAccess } from "@/lib/portal-auth";
+import { canManageServices } from "@/lib/portal-permissions";
 import { getPrisma } from "@/lib/prisma";
 
 const billingLabel: Record<BillingType, string> = {
@@ -16,7 +18,8 @@ const statusLabel: Record<ServiceStatus, string> = {
 };
 
 export default async function AdminServicesPage() {
-  await requirePortalAdminAccess();
+  const user = await requirePortalAdminAccess();
+  const canEditServices = canManageServices(user.role);
 
   const prisma = getPrisma();
   const services = await prisma.service.findMany({
@@ -37,49 +40,78 @@ export default async function AdminServicesPage() {
         </p>
       </div>
 
-      <div className="rounded-[1.5rem] bg-white p-6 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-text dark:ring-white/10">
-        <h3 className="text-xl font-bold">Cadastrar serviço</h3>
-        <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-700 dark:text-slate-300">
-          Este cadastro passa a alimentar o editor de ordem de serviço com dados
-          reais. O escopo aqui ainda e enxuto para manter o MVP leve.
-        </p>
+      {canEditServices ? (
+        <div className="rounded-[1.5rem] bg-white p-6 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-text dark:ring-white/10">
+          <h3 className="text-xl font-bold">Cadastrar serviço</h3>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-700 dark:text-slate-300">
+            Este cadastro passa a alimentar o editor de ordem de serviço com dados
+            reais e a vitrine do portal com os serviços ativos.
+          </p>
 
-        <div className="mt-6">
-          <AdminServiceCreateForm />
+          <div className="mt-6">
+            <AdminServiceCreateForm />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="rounded-[1.5rem] border border-amber-200 bg-amber-50 p-6 text-amber-950 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-100">
+          <h3 className="text-xl font-bold">Catálogo em modo consulta</h3>
+          <p className="mt-3 max-w-3xl text-sm leading-6">
+            Seu perfil pode consultar os serviços, mas somente administradores
+            podem cadastrar e alterar itens da vitrine.
+          </p>
+        </div>
+      )}
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {services.map((service) => (
-          <article
-            key={service.id}
-            className="rounded-[1.5rem] bg-white p-6 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-text dark:ring-white/10"
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700 dark:text-sky-300">
-              {service.category}
-            </p>
-            <h3 className="mt-3 text-xl font-bold">{service.name}</h3>
-            <p className="mt-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
-              {service.description}
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.12em]">
-              <span className="rounded-full bg-sky-100 px-3 py-1 text-sky-700 dark:bg-sky-400/15 dark:text-sky-300">
-                {billingLabel[service.billingType]}
-              </span>
-              <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700 dark:bg-white/10 dark:text-slate-300">
-                {statusLabel[service.status]}
-              </span>
-            </div>
-          </article>
-        ))}
+        {services.map((service) =>
+          canEditServices ? (
+            <AdminServiceManageCard
+              key={service.id}
+              service={{
+                id: service.id,
+                name: service.name,
+                category: service.category,
+                description: service.description,
+                billingType: service.billingType,
+                status: service.status,
+                basePrice:
+                  service.basePrice !== null ? String(service.basePrice) : "",
+                updatedAtLabel: new Intl.DateTimeFormat("pt-BR", {
+                  dateStyle: "short",
+                  timeStyle: "short",
+                }).format(service.updatedAt),
+              }}
+            />
+          ) : (
+            <article
+              key={service.id}
+              className="rounded-[1.5rem] bg-white p-6 text-slate-900 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-text dark:ring-white/10"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700 dark:text-sky-300">
+                {service.category}
+              </p>
+              <h3 className="mt-3 text-xl font-bold">{service.name}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
+                {service.description}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.12em]">
+                <span className="rounded-full bg-sky-100 px-3 py-1 text-sky-700 dark:bg-sky-400/15 dark:text-sky-300">
+                  {billingLabel[service.billingType]}
+                </span>
+                <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700 dark:bg-white/10 dark:text-slate-300">
+                  {statusLabel[service.status]}
+                </span>
+              </div>
+            </article>
+          )
+        )}
       </div>
 
       <div className="rounded-[1.5rem] bg-white/5 p-5 ring-1 ring-white/10">
         <h3 className="text-lg font-semibold text-white">O que adicionar depois</h3>
         <p className="mt-2 text-sm leading-6 text-slate-300">
-          Preço base, SLA, anexos, checklist de execução, tipo de faturamento,
-          modelo de contrato vinculado e permissão para o cliente solicitar esse
-          serviço pelo portal.
+          SLA, anexos, checklist de execução, modelo de contrato vinculado e
+          permissão para o cliente solicitar esse serviço pelo portal.
         </p>
       </div>
     </section>

@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { ServiceStatus } from "@prisma/client";
 import { MaxWidth } from "@/components/Layout/MaxWidth";
 import { Wrapper } from "@/components/Layout/Wrapper";
+import { getPrisma } from "@/lib/prisma";
 
 export const metadata = {
   title: "Portal de Servicos",
@@ -27,12 +29,25 @@ const quickAccess = [
 ];
 
 const roadmap = [
-  "Login interno para sua operacao administrativa.",
+  "Login do portal já separado por perfis administrativos e cliente.",
   "Cadastro de clientes e contratos com acompanhamento de status.",
   "Abertura de chamados e solicitacoes por cada cliente no futuro.",
 ];
 
-export default function Services() {
+export default async function Services() {
+  const prisma = getPrisma();
+  const services = await prisma.service.findMany({
+    where: { status: ServiceStatus.ACTIVE },
+    orderBy: [{ category: "asc" }, { name: "asc" }],
+    select: {
+      id: true,
+      name: true,
+      category: true,
+      description: true,
+      billingType: true,
+    },
+  });
+
   return (
     <Wrapper className="min-h-screen bg-sky-500 dark:bg-bg">
       <MaxWidth className="py-12 sm:py-16 lg:py-20">
@@ -119,11 +134,11 @@ export default function Services() {
             </div>
 
             <div className="mt-8 rounded-2xl border border-dashed border-white/15 bg-white/5 p-4">
-              <p className="text-sm font-semibold text-white">Estrutura planejada</p>
+              <p className="text-sm font-semibold text-white">Cliente já liberado</p>
               <p className="mt-2 text-sm leading-6 text-slate-300">
-                Quando você liberar essa área para clientes, eles poderão abrir
-                chamados, escolher o tipo de serviço e acompanhar o andamento de
-                cada atendimento em um painel próprio.
+                O perfil `CLIENT` já pode entrar no portal para consultar a OS
+                vinculada ao seu e-mail e acompanhar o status da execução em uma
+                área própria e somente leitura.
               </p>
             </div>
 
@@ -134,6 +149,53 @@ export default function Services() {
               Ajustar esse fluxo depois com integração real
             </Link>
           </aside>
+        </section>
+
+        <section className="mt-8 rounded-[2rem] bg-white p-6 text-slate-900 shadow-xl ring-1 ring-slate-200 sm:p-8 dark:bg-slate-900 dark:text-text dark:ring-white/10">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-300">
+                Vitrine de serviços
+              </p>
+              <h2 className="mt-2 text-2xl font-bold">
+                Serviços ativos publicados pelo administrador
+              </h2>
+            </div>
+            <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
+              Alterações feitas em `/admin/servicos` passam a refletir aqui.
+            </p>
+          </div>
+
+          {services.length ? (
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {services.map((service) => (
+                <article
+                  key={service.id}
+                  className="rounded-[1.5rem] bg-slate-50 p-5 ring-1 ring-slate-200 dark:bg-slate-950/50 dark:ring-white/10"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700 dark:text-sky-300">
+                    {service.category}
+                  </p>
+                  <h3 className="mt-3 text-lg font-semibold">{service.name}</h3>
+                  <p className="mt-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
+                    {service.description}
+                  </p>
+                  <span className="mt-4 inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-sky-700 dark:bg-sky-400/15 dark:text-sky-300">
+                    {service.billingType === "MONTHLY"
+                      ? "Mensal"
+                      : service.billingType === "PROJECT"
+                        ? "Projeto"
+                        : "Avulso"}
+                  </span>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-8 rounded-[1.5rem] border border-dashed border-slate-300 bg-slate-50 p-6 text-sm leading-6 text-slate-600 dark:border-white/10 dark:bg-slate-950/40 dark:text-slate-300">
+              Nenhum serviço ativo foi publicado ainda. Assim que um administrador
+              cadastrar ou ativar serviços no painel, eles aparecerão nesta vitrine.
+            </div>
+          )}
         </section>
       </MaxWidth>
     </Wrapper>

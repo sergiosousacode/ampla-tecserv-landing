@@ -30,6 +30,26 @@ export const serviceOrderVariableLabels = [
     example: "R$ 350,00",
   },
   {
+    key: "services.count",
+    label: "Quantidade de servicos",
+    example: "3",
+  },
+  {
+    key: "services.names",
+    label: "Resumo dos nomes",
+    example: "Suporte remoto, visita tecnica, configuracao de rede",
+  },
+  {
+    key: "services.list",
+    label: "Lista formatada de servicos",
+    example: "1. Suporte remoto (Suporte) - R$ 150,00",
+  },
+  {
+    key: "services.totalPrice",
+    label: "Valor total estimado",
+    example: "R$ 1.250,00",
+  },
+  {
     key: "order.title",
     label: "Titulo da ordem",
     example: "Ordem de servico para atendimento preventivo",
@@ -57,6 +77,12 @@ export interface ServiceOrderTemplateData {
     category: string;
     basePrice: string;
   };
+  services: {
+    count: string;
+    names: string;
+    list: string;
+    totalPrice: string;
+  };
   order: {
     title: string;
     createdAt: string;
@@ -75,9 +101,12 @@ Cliente: {{client.companyName}}
 Responsavel: {{client.contactName}}
 Documento: {{client.document}}
 
-Servico: {{service.name}}
-Categoria: {{service.category}}
-Valor: {{service.basePrice}}
+Servicos contratados: {{services.count}}
+Resumo: {{services.names}}
+Valor total estimado: {{services.totalPrice}}
+
+Lista de servicos
+{{services.list}}
 
 Descricao do atendimento
 Executar a atividade descrita nesta ordem de servico com acompanhamento da equipe interna da Ampla TecServ.

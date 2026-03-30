@@ -3,13 +3,16 @@ import { notFound } from "next/navigation";
 import { ContractStatus } from "@prisma/client";
 import PrintPageButton from "@/components/portal/PrintPageButton";
 import ServiceOrderFinalizeForm from "@/components/portal/ServiceOrderFinalizeForm";
+import ServiceOrderProgressForm from "@/components/portal/ServiceOrderProgressForm";
 import { shareServiceOrderWhatsappAction } from "@/app/admin/contratos/actions";
 import { requirePortalAdminAccess } from "@/lib/portal-auth";
+import { autoFinalizePendingClientFeedback } from "@/lib/service-order-lifecycle";
 import { getPrisma } from "@/lib/prisma";
+import { buildServiceSelectionSummary, formatServicePrice } from "@/lib/service-order-services";
 
 const statusLabel: Record<ContractStatus, string> = {
   DRAFT: "Rascunho",
-  PENDING_SIGNATURE: "Pendente",
+  PENDING_SIGNATURE: "Aguardando cliente",
   ACTIVE: "Em andamento",
   ARCHIVED: "Finalizada",
 };
@@ -22,6 +25,7 @@ export default async function AdminServiceOrderDetailPage({
   await requirePortalAdminAccess();
   const { id } = await params;
   const prisma = getPrisma();
+  await autoFinalizePendingClientFeedback(prisma);
 
   const order = await prisma.contract.findUnique({
     where: { id },
@@ -45,11 +49,17 @@ export default async function AdminServiceOrderDetailPage({
           phone: true,
         },
       },
-      service: {
+      contractServices: {
+        orderBy: { position: "asc" },
         select: {
-          name: true,
-          category: true,
-          basePrice: true,
+          position: true,
+          service: {
+            select: {
+              name: true,
+              category: true,
+              basePrice: true,
+            },
+          },
         },
       },
       createdBy: {
@@ -64,6 +74,18 @@ export default async function AdminServiceOrderDetailPage({
   if (!order) {
     notFound();
   }
+
+  const serviceSummary = buildServiceSelectionSummary(
+    order.contractServices.map((item) => ({
+      name: item.service.name,
+      category: item.service.category,
+      basePriceValue:
+        item.service.basePrice !== null ? Number(item.service.basePrice) : null,
+      basePriceLabel: formatServicePrice(
+        item.service.basePrice !== null ? Number(item.service.basePrice) : null
+      ),
+    }))
+  );
 
   return (
     <section className="grid gap-6">
@@ -93,7 +115,7 @@ export default async function AdminServiceOrderDetailPage({
             </p>
             <h1 className="mt-2 text-3xl font-bold">{order.title}</h1>
             <p className="mt-3 text-sm leading-6 text-slate-600">
-              Cliente: {order.client.companyName} • Serviço: {order.service.name}
+              Cliente: {order.client.companyName} • Serviços: {serviceSummary.shortLabel}
             </p>
           </div>
 
@@ -135,16 +157,11 @@ export default async function AdminServiceOrderDetailPage({
             <strong className="text-slate-900">WhatsApp:</strong> {order.client.phone || "-"}
           </p>
           <p>
-            <strong className="text-slate-900">Categoria:</strong> {order.service.category}
+            <strong className="text-slate-900">Serviços:</strong> {order.contractServices.length}
           </p>
           <p>
-            <strong className="text-slate-900">Valor:</strong>{" "}
-            {order.service.basePrice !== null
-              ? new Intl.NumberFormat("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                }).format(Number(order.service.basePrice))
-              : "A combinar"}
+            <strong className="text-slate-900">Valor total estimado:</strong>{" "}
+            {serviceSummary.totalPriceLabel}
           </p>
           <p>
             <strong className="text-slate-900">Criado por:</strong> {order.createdBy.name}
@@ -170,6 +187,30 @@ export default async function AdminServiceOrderDetailPage({
           </p>
         </div>
 
+        <div className="mt-6 rounded-[1.5rem] bg-slate-50 p-5 ring-1 ring-slate-200">
+          <h3 className="text-lg font-semibold text-slate-900">Serviços desta OS</h3>
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {order.contractServices.map((item) => (
+              <article
+                key={item.service.name + item.position}
+                className="rounded-2xl bg-white p-4 ring-1 ring-slate-200"
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
+                  {item.service.category}
+                </p>
+                <p className="mt-2 font-semibold text-slate-900">{item.service.name}</p>
+                <p className="mt-2 text-sm text-slate-600">
+                  {formatServicePrice(
+                    item.service.basePrice !== null
+                      ? Number(item.service.basePrice)
+                      : null
+                  )}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+
         <pre className="mt-6 whitespace-pre-wrap font-sans text-sm leading-7 text-slate-800 print:mt-4">
           {order.content}
         </pre>
@@ -177,11 +218,11 @@ export default async function AdminServiceOrderDetailPage({
         <div className="mt-8 grid gap-6 border-t border-slate-200 pt-6 print:hidden">
           <div className="rounded-[1.5rem] bg-slate-50 p-5 ring-1 ring-slate-200">
             <h3 className="text-lg font-semibold text-slate-900">
-              Finalização técnica e satisfação do cliente
+              Andamento operacional da OS
             </h3>
             <p className="mt-2 text-sm leading-6 text-slate-600">
-              Use esta etapa para registrar o encerramento da OS, o parecer do
-              técnico e a percepção final do cliente sobre o atendimento.
+              Use esta etapa para mover a ordem entre rascunho, aguardando cliente
+              e em andamento, mantendo uma atualização contínua para a equipe e para o cliente.
             </p>
 
             <div className="mt-5 grid gap-3 text-sm text-slate-700 md:grid-cols-3">
@@ -190,7 +231,55 @@ export default async function AdminServiceOrderDetailPage({
                 {statusLabel[order.status]}
               </p>
               <p>
-                <strong className="text-slate-900">Satisfação:</strong>{" "}
+                <strong className="text-slate-900">Última atualização:</strong>{" "}
+                {new Intl.DateTimeFormat("pt-BR", {
+                  dateStyle: "short",
+                  timeStyle: "short",
+                }).format(order.updatedAt)}
+              </p>
+              <p>
+                <strong className="text-slate-900">Finalizada:</strong>{" "}
+                {order.completedAt ? "Sim" : "Não"}
+              </p>
+            </div>
+
+            {order.technicianFeedback ? (
+              <div className="mt-4 rounded-2xl bg-white p-4 ring-1 ring-slate-200">
+                <p className="text-sm font-semibold text-slate-900">
+                  Última atualização operacional
+                </p>
+                <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-slate-700">
+                  {order.technicianFeedback}
+                </p>
+              </div>
+            ) : null}
+
+            <div className="mt-5">
+              <ServiceOrderProgressForm
+                orderId={order.id}
+                currentStatus={order.status}
+                technicianFeedback={order.technicianFeedback}
+              />
+            </div>
+          </div>
+
+          <div className="rounded-[1.5rem] bg-slate-50 p-5 ring-1 ring-slate-200">
+            <h3 className="text-lg font-semibold text-slate-900">
+              Encerramento manual da OS
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Use esta ação apenas quando precisar encerrar manualmente a OS pela equipe.
+              O fluxo principal agora é mover a ordem para &quot;Aguardando cliente&quot; e
+              receber a avaliação diretamente na área do cliente.
+            </p>
+
+            <div className="mt-5 grid gap-3 text-sm text-slate-700 md:grid-cols-3">
+              <p>
+                <strong className="text-slate-900">Status atual:</strong>{" "}
+                {statusLabel[order.status]}
+              </p>
+              <p>
+                <strong className="text-slate-900">Satisfação do cliente:</strong>{" "}
                 {order.clientSatisfaction ? `${order.clientSatisfaction}/5` : "-"}
               </p>
               <p>
@@ -199,10 +288,23 @@ export default async function AdminServiceOrderDetailPage({
               </p>
             </div>
 
+            {order.status === "ARCHIVED" &&
+            !order.clientSatisfaction &&
+            !order.clientFeedback ? (
+              <div className="mt-4 rounded-2xl bg-amber-50 p-4 ring-1 ring-amber-200">
+                <p className="text-sm font-semibold text-slate-900">
+                  Encerramento automático sem feedback
+                </p>
+                <p className="mt-2 text-sm leading-6 text-slate-700">
+                  Esta OS foi finalizada pelo portal após o prazo sem retorno do cliente.
+                </p>
+              </div>
+            ) : null}
+
             {order.technicianFeedback ? (
               <div className="mt-4 rounded-2xl bg-white p-4 ring-1 ring-slate-200">
                 <p className="text-sm font-semibold text-slate-900">
-                  Ultimo parecer tecnico
+                  Fechamento técnico atual
                 </p>
                 <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-slate-700">
                   {order.technicianFeedback}
@@ -214,8 +316,6 @@ export default async function AdminServiceOrderDetailPage({
               <ServiceOrderFinalizeForm
                 orderId={order.id}
                 technicianFeedback={order.technicianFeedback}
-                clientSatisfaction={order.clientSatisfaction}
-                clientFeedback={order.clientFeedback}
               />
             </div>
           </div>

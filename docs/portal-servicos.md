@@ -39,19 +39,19 @@
   Base do cadastro e gestao de usuarios, incluindo criacao manual de login, edicao de perfil/status e redefinicao de senha.
 
 - `src/app/admin/servicos/page.tsx`
-  Catalogo de servicos com cadastro real em banco.
+  Catalogo de servicos com cadastro, edicao real em banco e reflexo na vitrine do portal.
 
 - `src/app/admin/clientes/page.tsx`
   Base de clientes para alimentar ordens de servico reais.
 
 - `src/app/admin/contratos/page.tsx`
-  MVP da area de ordens de servico com editor dinamico, persistencia em banco e pagina imprimivel no navegador.
+  MVP da area de ordens de servico com editor dinamico, persistencia em banco, multiplos servicos por OS e pagina imprimivel no navegador.
 
 - `src/app/admin/contratos/[id]/page.tsx`
-  Pagina individual da OS para reimpressao, compartilhamento por WhatsApp e encerramento do atendimento.
+  Pagina individual da OS para reimpressao, compartilhamento por WhatsApp, listagem dos servicos vinculados e encerramento do atendimento.
 
 - `src/app/admin/contratos/actions.ts`
-  Server actions para criar OS, compartilhar por WhatsApp e registrar finalizacao.
+  Server actions para criar OS com mais de um servico, compartilhar por WhatsApp e registrar finalizacao.
 
 - `src/data/portal-admin.ts`
   Dados de exemplo para acelerar a interface inicial.
@@ -107,7 +107,7 @@ Se preferir usar um PostgreSQL ja existente, basta apontar `DATABASE_URL` e `DAT
 
 ## Proxima etapa recomendada
 
-1. Evoluir servicos, clientes e ordens com edicao completa e mais filtros operacionais.
+1. Evoluir clientes e ordens com edicao completa e mais filtros operacionais.
 2. Vincular usuarios `CLIENT` a empresas reais no banco.
 3. Adicionar geracao real de PDF se o fluxo justificar.
 4. Adicionar assinatura e compartilhamento por e-mail/WhatsApp.
@@ -181,6 +181,7 @@ versionamento documental.
 - O texto aceita variaveis dinamicas no formato `{{grupo.campo}}`.
 - A pagina renderiza uma previa imediatamente na web.
 - A ordem pode ser salva em banco e reaberta depois em uma pagina propria para impressao.
+- A ordem pode agrupar mais de um servico em um unico documento operacional.
 - A OS pode ser compartilhada para o WhatsApp do cliente quando houver telefone cadastrado.
   O envio atual usa mensagem resumida, sem expor o conteudo completo da OS na URL.
 - A finalizacao da OS registra parecer tecnico, satisfacao e retorno do cliente.
@@ -228,7 +229,7 @@ O portal passa a trabalhar com tres perfis de usuario:
   Exclusivo para `ADMIN`, porque concentra criacao de usuarios, troca de perfil, status e redefinicao de acesso.
 
 - `/admin/servicos`
-  Permitido para `ADMIN` e `OPERATIONAL`.
+  Permitido para `ADMIN` e `OPERATIONAL`, mas cadastro e alteracao de servicos ficam restritos a `ADMIN`.
 
 - `/admin/contratos`
   Permitido para `ADMIN` e `OPERATIONAL`.
@@ -251,7 +252,7 @@ O portal passa a trabalhar com tres perfis de usuario:
   Pode visualizar e operar contratos e servicos, mas nao pode abrir o modulo de usuarios nem alterar perfil de outras pessoas.
 
 - `CLIENT`
-  Nao acessa o ambiente administrativo e enxerga apenas a propria area de acompanhamento.
+  Nao acessa o ambiente administrativo e enxerga apenas a propria area de acompanhamento, com consulta em modo leitura da OS e do status vinculado ao seu e-mail.
 
 ### Escopo de dados
 

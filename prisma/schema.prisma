@@ -84,7 +84,7 @@ model Service {
   status      ServiceStatus  @default(DRAFT)
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
-  contracts   Contract[]
+  contractServices ContractService[]
 }
 
 model Contract {
@@ -102,10 +102,21 @@ model Contract {
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
   clientId       String
-  serviceId      String
   createdById    String
 
   client         Client          @relation(fields: [clientId], references: [id], onDelete: Cascade)
-  service        Service         @relation(fields: [serviceId], references: [id], onDelete: Cascade)
   createdBy      User            @relation("CreatedContracts", fields: [createdById], references: [id], onDelete: Restrict)
+  contractServices ContractService[]
+}
+
+model ContractService {
+  contractId String
+  serviceId  String
+  position   Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  contract   Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  service    Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@id([contractId, serviceId])
 }

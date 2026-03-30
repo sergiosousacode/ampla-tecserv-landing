@@ -5,6 +5,8 @@ import { ContractStatus, SharingChannel } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { requirePortalAdminAccess } from "@/lib/portal-auth";
 import { getPrisma } from "@/lib/prisma";
+import { autoFinalizePendingClientFeedback } from "@/lib/service-order-lifecycle";
+import { buildServiceSelectionSummary, formatServicePrice } from "@/lib/service-order-services";
 import {
   buildServiceOrderWhatsappMessage,
   normalizeWhatsappPhone,
@@ -21,6 +23,11 @@ export interface FinalizeServiceOrderFormState {
   success?: string;
 }
 
+export interface UpdateServiceOrderProgressFormState {
+  error?: string;
+  success?: string;
+}
+
 export async function createServiceOrderAction(
   _previousState: CreateServiceOrderFormState,
   formData: FormData
@@ -29,17 +36,21 @@ export async function createServiceOrderAction(
 
   const title = String(formData.get("title") || "").trim();
   const clientId = String(formData.get("clientId") || "").trim();
-  const serviceId = String(formData.get("serviceId") || "").trim();
+  const serviceIds = formData
+    .getAll("serviceIds")
+    .map((value) => String(value).trim())
+    .filter(Boolean);
   const template = String(formData.get("template") || "").trim();
 
-  if (!title || !clientId || !serviceId || !template) {
+  if (!title || !clientId || !serviceIds.length || !template) {
     return {
-      error: "Preencha titulo, cliente, servico e o texto da ordem de servico.",
+      error: "Preencha titulo, cliente, ao menos um servico e o texto da ordem de servico.",
     };
   }
 
   const prisma = getPrisma();
-  const [client, service] = await Promise.all([
+  await autoFinalizePendingClientFeedback(prisma);
+  const [client, services] = await Promise.all([
     prisma.client.findUnique({
       where: { id: clientId },
       select: {
@@ -49,20 +60,37 @@ export async function createServiceOrderAction(
         document: true,
       },
     }),
-    prisma.service.findUnique({
-      where: { id: serviceId },
+    prisma.service.findMany({
+      where: { id: { in: serviceIds } },
       select: {
         id: true,
         name: true,
         category: true,
         basePrice: true,
       },
+      orderBy: { name: "asc" },
     }),
   ]);
 
-  if (!client || !service) {
+  if (!client || services.length !== serviceIds.length) {
     return { error: "Cliente ou servico nao encontrado para criar a ordem." };
   }
+
+  const servicesById = new Map(services.map((service) => [service.id, service]));
+  const orderedServices = serviceIds
+    .map((serviceId) => servicesById.get(serviceId))
+    .filter((service): service is NonNullable<typeof service> => Boolean(service));
+  const serviceSummary = buildServiceSelectionSummary(
+    orderedServices.map((service) => ({
+      name: service.name,
+      category: service.category,
+      basePriceValue:
+        service.basePrice !== null ? Number(service.basePrice) : null,
+      basePriceLabel: formatServicePrice(
+        service.basePrice !== null ? Number(service.basePrice) : null
+      ),
+    }))
+  );
 
   const content = renderServiceOrderTemplate(template, {
     client: {
@@ -71,15 +99,15 @@ export async function createServiceOrderAction(
       document: client.document || "-",
     },
     service: {
-      name: service.name,
-      category: service.category,
-      basePrice:
-        service.basePrice !== null
-          ? new Intl.NumberFormat("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            }).format(Number(service.basePrice))
-          : "A combinar",
+      name: serviceSummary.primaryService.name,
+      category: serviceSummary.primaryService.category,
+      basePrice: serviceSummary.primaryService.basePriceLabel,
+    },
+    services: {
+      count: serviceSummary.count,
+      names: serviceSummary.names,
+      list: serviceSummary.list,
+      totalPrice: serviceSummary.totalPriceLabel,
     },
     order: {
       title,
@@ -97,8 +125,13 @@ export async function createServiceOrderAction(
       title,
       content,
       clientId: client.id,
-      serviceId: service.id,
       createdById: currentUser.id,
+      contractServices: {
+        create: orderedServices.map((service, index) => ({
+          serviceId: service.id,
+          position: index,
+        })),
+      },
     },
     select: {
       id: true,
@@ -107,6 +140,7 @@ export async function createServiceOrderAction(
 
   revalidatePath("/admin/contratos");
   revalidatePath("/admin");
+  revalidatePath("/cliente");
 
   return {
     success: `Ordem criada com sucesso. Abra /admin/contratos/${order.id} para imprimir.`,
@@ -135,9 +169,14 @@ export async function shareServiceOrderWhatsappAction(formData: FormData) {
           phone: true,
         },
       },
-      service: {
+      contractServices: {
+        orderBy: { position: "asc" },
         select: {
-          name: true,
+          service: {
+            select: {
+              name: true,
+            },
+          },
         },
       },
     },
@@ -155,14 +194,67 @@ export async function shareServiceOrderWhatsappAction(formData: FormData) {
   });
 
   const phone = normalizeWhatsappPhone(order.client.phone);
+  const serviceSummary = buildServiceSelectionSummary(
+    order.contractServices.map((item) => ({
+      name: item.service.name,
+      category: "",
+      basePriceValue: null,
+      basePriceLabel: item.service.name,
+    }))
+  );
   const message = buildServiceOrderWhatsappMessage({
     title: order.title,
     clientName: order.client.companyName,
-    serviceName: order.service.name,
+    serviceSummary: serviceSummary.shortLabel,
     companyName: "Ampla TecServ",
   });
 
   redirect(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`);
+}
+
+export async function updateServiceOrderProgressAction(
+  _previousState: UpdateServiceOrderProgressFormState,
+  formData: FormData
+): Promise<UpdateServiceOrderProgressFormState> {
+  await requirePortalAdminAccess();
+
+  const orderId = String(formData.get("orderId") || "").trim();
+  const statusInput = String(formData.get("status") || "").trim();
+  const technicianFeedback = String(formData.get("technicianFeedback") || "").trim();
+
+  if (!orderId) {
+    return { error: "Ordem nao informada para atualizar o andamento." };
+  }
+
+  if (
+    ![
+      ContractStatus.DRAFT,
+      ContractStatus.PENDING_SIGNATURE,
+      ContractStatus.ACTIVE,
+    ].includes(statusInput as ContractStatus)
+  ) {
+    return { error: "Selecione um status operacional valido para a OS." };
+  }
+
+  const prisma = getPrisma();
+
+  await prisma.contract.update({
+    where: { id: orderId },
+    data: {
+      status: statusInput as ContractStatus,
+      technicianFeedback: technicianFeedback || null,
+      completedAt: null,
+    },
+  });
+
+  revalidatePath(`/admin/contratos/${orderId}`);
+  revalidatePath("/admin/contratos");
+  revalidatePath("/admin");
+  revalidatePath("/cliente");
+
+  return {
+    success: "Andamento operacional atualizado com sucesso.",
+  };
 }
 
 export async function finalizeServiceOrderAction(
@@ -173,20 +265,10 @@ export async function finalizeServiceOrderAction(
 
   const orderId = String(formData.get("orderId") || "").trim();
   const technicianFeedback = String(formData.get("technicianFeedback") || "").trim();
-  const clientSatisfactionValue = String(formData.get("clientSatisfaction") || "").trim();
-  const clientFeedback = String(formData.get("clientFeedback") || "").trim();
 
-  if (!orderId || !technicianFeedback || !clientSatisfactionValue) {
+  if (!orderId) {
     return {
-      error: "Informe o parecer tecnico e a nota de satisfacao do cliente.",
-    };
-  }
-
-  const clientSatisfaction = Number(clientSatisfactionValue);
-
-  if (!Number.isInteger(clientSatisfaction) || clientSatisfaction < 1 || clientSatisfaction > 5) {
-    return {
-      error: "A satisfacao do cliente deve ser uma nota entre 1 e 5.",
+      error: "Informe a OS que deve ser finalizada manualmente.",
     };
   }
 
@@ -197,17 +279,16 @@ export async function finalizeServiceOrderAction(
     data: {
       status: ContractStatus.ARCHIVED,
       completedAt: new Date(),
-      technicianFeedback,
-      clientSatisfaction,
-      clientFeedback: clientFeedback || null,
+      technicianFeedback: technicianFeedback || null,
     },
   });
 
   revalidatePath(`/admin/contratos/${orderId}`);
   revalidatePath("/admin/contratos");
   revalidatePath("/admin");
+  revalidatePath("/cliente");
 
   return {
-    success: "Ordem finalizada com feedback tecnico e retorno do cliente.",
+    success: "OS finalizada manualmente pela equipe interna.",
   };
 }

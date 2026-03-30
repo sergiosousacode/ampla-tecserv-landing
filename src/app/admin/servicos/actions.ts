@@ -1,21 +1,16 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { BillingType, ServiceStatus } from "@prisma/client";
-import { requirePortalAdminAccess } from "@/lib/portal-auth";
+import { BillingType, ServiceStatus, UserRole } from "@prisma/client";
+import { requirePortalRole } from "@/lib/portal-auth";
 import { getPrisma } from "@/lib/prisma";
 
-export interface CreateServiceFormState {
+export interface ServiceFormState {
   error?: string;
   success?: string;
 }
 
-export async function createServiceAction(
-  _previousState: CreateServiceFormState,
-  formData: FormData
-): Promise<CreateServiceFormState> {
-  await requirePortalAdminAccess();
-
+function parseServiceFormData(formData: FormData) {
   const name = String(formData.get("name") || "").trim();
   const category = String(formData.get("category") || "").trim();
   const description = String(formData.get("description") || "").trim();
@@ -41,9 +36,7 @@ export async function createServiceAction(
     return { error: "Informe um preco base numerico ou deixe em branco." };
   }
 
-  const prisma = getPrisma();
-
-  await prisma.service.create({
+  return {
     data: {
       name,
       category,
@@ -52,13 +45,76 @@ export async function createServiceAction(
       status: statusInput as ServiceStatus,
       basePrice: normalizedBasePrice || null,
     },
+  };
+}
+
+export async function createServiceAction(
+  _previousState: ServiceFormState,
+  formData: FormData
+): Promise<ServiceFormState> {
+  await requirePortalRole(UserRole.ADMIN);
+
+  const parsed = parseServiceFormData(formData);
+
+  if ("error" in parsed) {
+    return parsed;
+  }
+
+  const prisma = getPrisma();
+
+  await prisma.service.create({
+    data: parsed.data,
   });
 
   revalidatePath("/admin/servicos");
   revalidatePath("/admin/contratos");
   revalidatePath("/admin");
+  revalidatePath("/portal-servicos");
 
   return {
-    success: `Servico ${name} cadastrado com sucesso.`,
+    success: `Servico ${parsed.data.name} cadastrado com sucesso.`,
+  };
+}
+
+export async function updateServiceAction(
+  _previousState: ServiceFormState,
+  formData: FormData
+): Promise<ServiceFormState> {
+  await requirePortalRole(UserRole.ADMIN);
+
+  const serviceId = String(formData.get("serviceId") || "").trim();
+
+  if (!serviceId) {
+    return { error: "Servico nao informado para edicao." };
+  }
+
+  const parsed = parseServiceFormData(formData);
+
+  if ("error" in parsed) {
+    return parsed;
+  }
+
+  const prisma = getPrisma();
+  const existingService = await prisma.service.findUnique({
+    where: { id: serviceId },
+    select: { id: true },
+  });
+
+  if (!existingService) {
+    return { error: "Servico nao encontrado." };
+  }
+
+  await prisma.service.update({
+    where: { id: serviceId },
+    data: parsed.data,
+  });
+
+  revalidatePath("/admin/servicos");
+  revalidatePath("/admin/contratos");
+  revalidatePath("/admin");
+  revalidatePath("/portal-servicos");
+
+  return {
+    success: `Servico ${parsed.data.name} atualizado com sucesso.`,
   };
 }

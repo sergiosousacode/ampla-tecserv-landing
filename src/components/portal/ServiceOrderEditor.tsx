@@ -11,6 +11,7 @@ import {
   renderServiceOrderTemplate,
   serviceOrderVariableLabels,
 } from "@/lib/service-order-template";
+import { buildServiceSelectionSummary } from "@/lib/service-order-services";
 
 interface ServiceOrderEditorProps {
   currentUserName: string;
@@ -24,7 +25,8 @@ interface ServiceOrderEditorProps {
     id: string;
     name: string;
     category: string;
-    basePrice: string;
+    basePriceLabel: string;
+    basePriceValue: number | null;
   }>;
   orders: Array<{
     id: string;
@@ -57,16 +59,31 @@ export default function ServiceOrderEditor({
   );
   const [title, setTitle] = useState("Atendimento preventivo de TI");
   const [clientId, setClientId] = useState(clients[0]?.id || "");
-  const [serviceId, setServiceId] = useState(services[0]?.id || "");
+  const [selectedServiceIds, setSelectedServiceIds] = useState<string[]>(
+    services[0]?.id ? [services[0].id] : []
+  );
   const [template, setTemplate] = useState(defaultServiceOrderTemplate);
 
   const selectedClient = useMemo(
     () => clients.find((client) => client.id === clientId) || clients[0],
     [clientId, clients]
   );
-  const selectedService = useMemo(
-    () => services.find((service) => service.id === serviceId) || services[0],
-    [serviceId, services]
+  const selectedServices = useMemo(
+    () =>
+      services.filter((service) => selectedServiceIds.includes(service.id)),
+    [selectedServiceIds, services]
+  );
+  const serviceSummary = useMemo(
+    () =>
+      buildServiceSelectionSummary(
+        selectedServices.map((service) => ({
+          name: service.name,
+          category: service.category,
+          basePriceValue: service.basePriceValue,
+          basePriceLabel: service.basePriceLabel,
+        }))
+      ),
+    [selectedServices]
   );
 
   const preview = renderServiceOrderTemplate(template, {
@@ -76,9 +93,15 @@ export default function ServiceOrderEditor({
       document: selectedClient?.document || "-",
     },
     service: {
-      name: selectedService?.name || "",
-      category: selectedService?.category || "",
-      basePrice: selectedService?.basePrice || "A combinar",
+      name: serviceSummary.primaryService.name,
+      category: serviceSummary.primaryService.category,
+      basePrice: serviceSummary.primaryService.basePriceLabel,
+    },
+    services: {
+      count: serviceSummary.count,
+      names: serviceSummary.names,
+      list: serviceSummary.list,
+      totalPrice: serviceSummary.totalPriceLabel,
     },
     order: {
       title,
@@ -198,19 +221,44 @@ export default function ServiceOrderEditor({
               </label>
 
               <label className="grid gap-2 text-sm text-slate-700 dark:text-slate-300">
-                <span className="font-medium">Servico</span>
-                <select
-                  name="serviceId"
-                  value={serviceId}
-                  onChange={(event) => setServiceId(event.target.value)}
-                  className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 dark:border-white/10 dark:bg-slate-950/70 dark:text-white"
-                >
-                  {services.map((service) => (
-                    <option key={service.id} value={service.id}>
-                      {service.name}
-                    </option>
-                  ))}
-                </select>
+                <span className="font-medium">Servicos da ordem</span>
+                <div className="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-3 dark:border-white/10 dark:bg-slate-900">
+                  <div className="grid gap-2">
+                    {services.map((service) => {
+                      const checked = selectedServiceIds.includes(service.id);
+
+                      return (
+                        <label
+                          key={service.id}
+                          className="flex items-start gap-3 rounded-2xl bg-white px-3 py-3 text-sm ring-1 ring-slate-200 dark:bg-slate-950/70 dark:ring-white/10"
+                        >
+                          <input
+                            name="serviceIds"
+                            type="checkbox"
+                            value={service.id}
+                            checked={checked}
+                            onChange={(event) => {
+                              setSelectedServiceIds((current) =>
+                                event.target.checked
+                                  ? [...current, service.id]
+                                  : current.filter((id) => id !== service.id)
+                              );
+                            }}
+                            className="mt-1 h-4 w-4 rounded border-slate-300 text-sky-600 focus:ring-sky-500"
+                          />
+                          <span>
+                            <span className="font-medium text-slate-900 dark:text-white">
+                              {service.name}
+                            </span>
+                            <span className="mt-1 block text-slate-600 dark:text-slate-400">
+                              {service.category} • {service.basePriceLabel}
+                            </span>
+                          </span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
               </label>
 
               <label className="grid gap-2 text-sm text-slate-700 dark:text-slate-300">
@@ -232,18 +280,18 @@ export default function ServiceOrderEditor({
               </label>
 
               <label className="grid gap-2 text-sm text-slate-700 dark:text-slate-300">
-                <span className="font-medium">Categoria</span>
+                <span className="font-medium">Resumo dos servicos</span>
                 <input
-                  value={selectedService?.category || ""}
+                  value={serviceSummary.names}
                   readOnly
                   className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none dark:border-white/10 dark:bg-slate-900 dark:text-white"
                 />
               </label>
 
               <label className="grid gap-2 text-sm text-slate-700 dark:text-slate-300">
-                <span className="font-medium">Valor do servico</span>
+                <span className="font-medium">Valor total estimado</span>
                 <input
-                  value={selectedService?.basePrice || "A combinar"}
+                  value={serviceSummary.totalPriceLabel}
                   readOnly
                   className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none dark:border-white/10 dark:bg-slate-900 dark:text-white"
                 />
@@ -265,7 +313,7 @@ export default function ServiceOrderEditor({
             <div className="mt-5 flex justify-end">
               <button
                 type="submit"
-                disabled={isPending || !clients.length || !services.length}
+                disabled={isPending || !clients.length || !services.length || !selectedServiceIds.length}
                 className="rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-sky-400 dark:text-slate-950 dark:hover:bg-sky-300"
               >
                 {isPending ? "Salvando ordem..." : "Salvar ordem no banco"}

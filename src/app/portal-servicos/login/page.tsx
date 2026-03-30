@@ -76,7 +76,7 @@ export default function PortalLoginPage() {
               <p className="text-sm font-semibold text-white">Fluxo previsto</p>
               <p className="mt-2 text-sm leading-6 text-slate-300">
                 `ADMIN` e `OPERATIONAL` entram no ambiente interno. `CLIENT`
-                segue para uma area separada de acompanhamento.
+                segue para uma area separada de acompanhamento da OS em modo leitura.
               </p>
             </div>
 

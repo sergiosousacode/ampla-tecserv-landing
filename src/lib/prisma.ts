@@ -6,7 +6,10 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 export function getPrisma() {
-  const databaseUrl = process.env.DATABASE_URL || process.env.DATABASE_URL_LOCAL;
+  const databaseUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.DATABASE_URL || process.env.DATABASE_URL_LOCAL
+      : process.env.DATABASE_URL_LOCAL || process.env.DATABASE_URL;
 
   if (!databaseUrl) {
     throw new Error(

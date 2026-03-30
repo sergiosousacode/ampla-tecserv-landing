@@ -23,3 +23,7 @@ export function canAccessAdmin(role: UserRole) {
 export function canManageUsers(role: UserRole) {
   return role === UserRole.ADMIN;
 }
+
+export function canManageServices(role: UserRole) {
+  return role === UserRole.ADMIN;
+}

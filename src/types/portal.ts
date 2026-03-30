@@ -20,7 +20,7 @@ export interface ServiceCatalogItem {
 export interface ContractRecord {
   id: string;
   client: string;
-  service: string;
+  services: string[];
   status: "em elaboracao" | "aguardando assinatura" | "ativo";
   pdfStatus: "pronto" | "pendente";
   sharing: "email" | "whatsapp" | "portal";

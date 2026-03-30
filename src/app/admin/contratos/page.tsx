@@ -2,10 +2,12 @@ import { ContractStatus } from "@prisma/client";
 import ServiceOrderEditor from "@/components/portal/ServiceOrderEditor";
 import { requirePortalAdminAccess } from "@/lib/portal-auth";
 import { getPrisma } from "@/lib/prisma";
+import { autoFinalizePendingClientFeedback } from "@/lib/service-order-lifecycle";
+import { buildServiceSelectionSummary } from "@/lib/service-order-services";
 
 const statusLabel: Record<ContractStatus, string> = {
   DRAFT: "Rascunho",
-  PENDING_SIGNATURE: "Pendente",
+  PENDING_SIGNATURE: "Aguardando cliente",
   ACTIVE: "Em andamento",
   ARCHIVED: "Finalizada",
 };
@@ -13,6 +15,7 @@ const statusLabel: Record<ContractStatus, string> = {
 export default async function AdminContractsPage() {
   const user = await requirePortalAdminAccess();
   const prisma = getPrisma();
+  await autoFinalizePendingClientFeedback(prisma);
 
   const [clients, services, orders] = await Promise.all([
     prisma.client.findMany({
@@ -46,9 +49,16 @@ export default async function AdminContractsPage() {
             companyName: true,
           },
         },
-        service: {
+        contractServices: {
+          orderBy: { position: "asc" },
           select: {
-            name: true,
+            service: {
+              select: {
+                name: true,
+                category: true,
+                basePrice: true,
+              },
+            },
           },
         },
         createdBy: {
@@ -89,19 +99,30 @@ export default async function AdminContractsPage() {
           id: service.id,
           name: service.name,
           category: service.category,
-          basePrice:
+          basePriceLabel:
             service.basePrice !== null
               ? new Intl.NumberFormat("pt-BR", {
                   style: "currency",
                   currency: "BRL",
                 }).format(Number(service.basePrice))
               : "A combinar",
+          basePriceValue:
+            service.basePrice !== null ? Number(service.basePrice) : null,
         }))}
         orders={orders.map((order) => ({
           id: order.id,
           title: order.title,
           clientName: order.client.companyName,
-          serviceName: order.service.name,
+          serviceName: buildServiceSelectionSummary(
+            order.contractServices.map((item) => ({
+              name: item.service.name,
+              category: item.service.category,
+              basePriceValue:
+                item.service.basePrice !== null
+                  ? Number(item.service.basePrice)
+                  : null,
+            }))
+          ).shortLabel,
           createdByName: order.createdBy.name,
           statusLabel: statusLabel[order.status],
           updatedAtLabel: new Intl.DateTimeFormat("pt-BR", {

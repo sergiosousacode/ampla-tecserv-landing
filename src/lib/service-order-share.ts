@@ -5,7 +5,7 @@ export function normalizeWhatsappPhone(phone: string) {
 export function buildServiceOrderWhatsappMessage(input: {
   title: string;
   clientName: string;
-  serviceName: string;
+  serviceSummary: string;
   companyName: string;
 }) {
   return [
@@ -13,7 +13,7 @@ export function buildServiceOrderWhatsappMessage(input: {
     "",
     `A ordem de servico "${input.title}" esta pronta para atendimento.`,
     `Cliente: ${input.clientName}`,
-    `Servico: ${input.serviceName}`,
+    `Servicos: ${input.serviceSummary}`,
     `Empresa responsavel: ${input.companyName}`,
     "",
     "Entre em contato com a equipe da Ampla TecServ para validacao e alinhamento final.",
