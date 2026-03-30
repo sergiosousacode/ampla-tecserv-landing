@@ -147,7 +147,7 @@ src/
 - Editor de ordem de servico com variaveis dinamicas [OK]
 - Compartilhamento resumido por WhatsApp [OK]
 - Finalizacao da OS com parecer tecnico e satisfacao do cliente [OK]
-- Exportacao e impressao de PDF
+- Exportacao e impressao de PDF [OK]
 - Compartilhamento do documento por e-mail
 - Upload de anexos e historico de atendimento
 
