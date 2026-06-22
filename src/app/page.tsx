@@ -33,7 +33,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-10 grid grid-cols-2 place-items-center gap-6 rounded-[1.5rem] bg-slate-50 p-6 ring-1 ring-slate-200 sm:grid-cols-3 md:grid-cols-5 dark:bg-slate-950/50 dark:ring-white/10">
+            <div className="mt-5 grid grid-cols-4 place-items-center gap-6 rounded-[1.5rem] bg-slate-50 p-6 ring-1 ring-slate-200 md:grid-cols-4 dark:bg-slate-950/50 dark:ring-white/10">
               <Image
                 src="/partners/arpa.svg"
                 alt="Arpa Sistemas"
@@ -57,16 +57,6 @@ export default function Home() {
               <Image
                 src="/partners/prodo.svg"
                 alt="Prodo Sistemas"
-                width={160}
-                height={80}
-                className="h-auto w-24 grayscale transition hover:grayscale-0 sm:w-32 md:w-[160px]"
-                sizes="(max-width: 640px) 80px, (max-width: 1024px) 120px, 160px"
-                loading="lazy"
-              />
-
-              <Image
-                src="/partners/mpcard.svg"
-                alt="MP Card"
                 width={160}
                 height={80}
                 className="h-auto w-24 grayscale transition hover:grayscale-0 sm:w-32 md:w-[160px]"

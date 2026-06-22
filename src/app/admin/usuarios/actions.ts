@@ -1,8 +1,14 @@
 "use server";
 
-import bcrypt from "bcrypt";
 import { revalidatePath } from "next/cache";
-import { UserRole, UserStatus } from "@prisma/client";
+import { UserRole } from "@prisma/client";
+import {
+  createPortalUser,
+  resetPortalUserPassword,
+  updatePortalUser,
+} from "@/application/portal/users";
+import { bcryptPasswordHasher } from "@/infra/portal/bcrypt-password-hasher";
+import { createPrismaUsersRepository } from "@/infra/portal/prisma-users-repository";
 import { requirePortalRole } from "@/lib/portal-auth";
 import { getPrisma } from "@/lib/prisma";
 
@@ -16,69 +22,30 @@ export interface UpdatePortalUserFormState {
   success?: string;
 }
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 export async function createPortalUserAction(
   _previousState: CreatePortalUserFormState,
   formData: FormData
 ): Promise<CreatePortalUserFormState> {
   await requirePortalRole(UserRole.ADMIN);
 
-  const name = String(formData.get("name") || "").trim();
-  const email = String(formData.get("email") || "")
-    .trim()
-    .toLowerCase();
-  const password = String(formData.get("password") || "");
-  const roleInput = String(formData.get("role") || "");
-  const statusInput = String(formData.get("status") || "");
-
-  if (!name || !email || !password || !roleInput || !statusInput) {
-    return { error: "Preencha nome, e-mail, senha, perfil e status." };
-  }
-
-  if (!EMAIL_REGEX.test(email)) {
-    return { error: "Informe um e-mail valido." };
-  }
-
-  if (password.length < 6) {
-    return { error: "A senha precisa ter pelo menos 6 caracteres." };
-  }
-
-  if (!Object.values(UserRole).includes(roleInput as UserRole)) {
-    return { error: "Perfil invalido." };
-  }
-
-  if (!Object.values(UserStatus).includes(statusInput as UserStatus)) {
-    return { error: "Status invalido." };
-  }
-
   const prisma = getPrisma();
-  const existingUser = await prisma.user.findUnique({
-    where: { email },
-    select: { id: true },
+  const result = await createPortalUser({
+    repository: createPrismaUsersRepository(prisma),
+    passwordHasher: bcryptPasswordHasher,
+    name: String(formData.get("name") || ""),
+    email: String(formData.get("email") || ""),
+    password: String(formData.get("password") || ""),
+    role: String(formData.get("role") || ""),
+    status: String(formData.get("status") || ""),
   });
 
-  if (existingUser) {
-    return { error: "Ja existe um usuario com este e-mail." };
+  if (result.error) {
+    return result;
   }
-
-  const passwordHash = await bcrypt.hash(password, 10);
-
-  await prisma.user.create({
-    data: {
-      name,
-      email,
-      passwordHash,
-      role: roleInput as UserRole,
-      status: statusInput as UserStatus,
-    },
-  });
 
   revalidatePath("/admin/usuarios");
 
-  return {
-    success: `Usuario ${name} criado com sucesso.`,
-  };
+  return result;
 }
 
 export async function updatePortalUserAction(
@@ -87,74 +54,24 @@ export async function updatePortalUserAction(
 ): Promise<UpdatePortalUserFormState> {
   const currentUser = await requirePortalRole(UserRole.ADMIN);
 
-  const userId = String(formData.get("userId") || "").trim();
-  const name = String(formData.get("name") || "").trim();
-  const email = String(formData.get("email") || "")
-    .trim()
-    .toLowerCase();
-  const roleInput = String(formData.get("role") || "");
-  const statusInput = String(formData.get("status") || "");
-
-  if (!userId || !name || !email || !roleInput || !statusInput) {
-    return { error: "Preencha nome, e-mail, perfil e status." };
-  }
-
-  if (!EMAIL_REGEX.test(email)) {
-    return { error: "Informe um e-mail valido." };
-  }
-
-  if (!Object.values(UserRole).includes(roleInput as UserRole)) {
-    return { error: "Perfil invalido." };
-  }
-
-  if (!Object.values(UserStatus).includes(statusInput as UserStatus)) {
-    return { error: "Status invalido." };
-  }
-
-  if (
-    currentUser.id === userId &&
-    ((roleInput as UserRole) !== UserRole.ADMIN ||
-      (statusInput as UserStatus) !== UserStatus.ACTIVE)
-  ) {
-    return {
-      error: "Voce nao pode remover seu proprio acesso de administrador ativo.",
-    };
-  }
-
   const prisma = getPrisma();
-  const existingUser = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { id: true, name: true },
+  const result = await updatePortalUser({
+    repository: createPrismaUsersRepository(prisma),
+    currentUser,
+    userId: String(formData.get("userId") || ""),
+    name: String(formData.get("name") || ""),
+    email: String(formData.get("email") || ""),
+    role: String(formData.get("role") || ""),
+    status: String(formData.get("status") || ""),
   });
 
-  if (!existingUser) {
-    return { error: "Usuario nao encontrado." };
+  if (result.error) {
+    return result;
   }
-
-  const userWithSameEmail = await prisma.user.findUnique({
-    where: { email },
-    select: { id: true },
-  });
-
-  if (userWithSameEmail && userWithSameEmail.id !== userId) {
-    return { error: "Ja existe outro usuario com este e-mail." };
-  }
-
-  await prisma.user.update({
-    where: { id: userId },
-    data: {
-      name,
-      email,
-      role: roleInput as UserRole,
-      status: statusInput as UserStatus,
-    },
-  });
 
   revalidatePath("/admin/usuarios");
 
-  return {
-    success: `Dados de ${name} atualizados com sucesso.`,
-  };
+  return result;
 }
 
 export async function resetPortalUserPasswordAction(
@@ -163,37 +80,19 @@ export async function resetPortalUserPasswordAction(
 ): Promise<UpdatePortalUserFormState> {
   await requirePortalRole(UserRole.ADMIN);
 
-  const userId = String(formData.get("userId") || "").trim();
-  const password = String(formData.get("password") || "");
-
-  if (!userId || !password) {
-    return { error: "Informe a nova senha." };
-  }
-
-  if (password.length < 6) {
-    return { error: "A nova senha precisa ter pelo menos 6 caracteres." };
-  }
-
   const prisma = getPrisma();
-  const existingUser = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { id: true, name: true },
+  const result = await resetPortalUserPassword({
+    repository: createPrismaUsersRepository(prisma),
+    passwordHasher: bcryptPasswordHasher,
+    userId: String(formData.get("userId") || ""),
+    password: String(formData.get("password") || ""),
   });
 
-  if (!existingUser) {
-    return { error: "Usuario nao encontrado." };
+  if (result.error) {
+    return result;
   }
-
-  const passwordHash = await bcrypt.hash(password, 10);
-
-  await prisma.user.update({
-    where: { id: userId },
-    data: { passwordHash },
-  });
 
   revalidatePath("/admin/usuarios");
 
-  return {
-    success: `Senha de ${existingUser.name} redefinida com sucesso.`,
-  };
+  return result;
 }

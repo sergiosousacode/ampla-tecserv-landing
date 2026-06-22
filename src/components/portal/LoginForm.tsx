@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import {
   loginPortalAction,
@@ -30,18 +31,28 @@ export default function LoginForm() {
           placeholder="voce@empresa.com.br"
           className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:bg-white/10"
         />
+        {/*
         <p className="mt-2 text-xs text-slate-400">
           Use o e-mail e a senha cadastrados por um administrador do portal.
         </p>
+        */}
       </div>
 
       <div>
-        <label
-          htmlFor="password"
-          className="mb-2 block text-sm font-medium text-slate-200"
-        >
-          Senha
-        </label>
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-slate-200"
+          >
+            Senha
+          </label>
+          <Link
+            href="/portal-servicos/esqueci-senha"
+            className="text-xs font-semibold text-sky-300 transition hover:text-sky-200"
+          >
+            Esqueci minha senha
+          </Link>
+        </div>
         <input
           id="password"
           name="password"

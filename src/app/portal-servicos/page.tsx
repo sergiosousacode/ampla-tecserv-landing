@@ -26,11 +26,13 @@ const quickAccess = [
   },
 ];
 
+/*
 const roadmap = [
   "Login interno para sua operacao administrativa.",
   "Cadastro de clientes e contratos com acompanhamento de status.",
   "Abertura de chamados e solicitacoes por cada cliente no futuro.",
 ];
+*/
 
 export default function Services() {
   return (
@@ -68,6 +70,7 @@ export default function Services() {
               ))}
             </div>
 
+            {/*
             <div className="mt-8 rounded-2xl bg-white p-5 text-slate-900 shadow-lg sm:p-6 dark:bg-slate-900 dark:text-text">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-700 dark:text-sky-300">
                 Próxima fase
@@ -81,6 +84,7 @@ export default function Services() {
                 ))}
               </ul>
             </div>
+            */}
           </div>
 
           <aside className="rounded-[2rem] bg-slate-950 p-6 text-white shadow-2xl ring-1 ring-white/10 sm:p-8 dark:bg-slate-900">
@@ -97,18 +101,22 @@ export default function Services() {
               </span>
             </div>
 
+            {/*
             <p className="mt-4 text-sm leading-6 text-slate-300">
               Esta página funciona como apresentação do portal. O login real fica
               na tela restrita e válida o e-mail e a senha no servidor.
             </p>
+            */}
 
             <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-5">
               <p className="text-sm font-semibold text-white">Acesso administrativo</p>
+              {/*
               <p className="mt-2 text-sm leading-6 text-slate-300">
                 Para entrar no painel, siga para a tela de login protegida. Os
                 campos não aparecem aqui para evitar a impressao de que esta página
                 já autentica o acesso.
               </p>
+              */}
 
               <Link
                 href="/portal-servicos/login"
@@ -118,6 +126,7 @@ export default function Services() {
               </Link>
             </div>
 
+            {/*
             <div className="mt-8 rounded-2xl border border-dashed border-white/15 bg-white/5 p-4">
               <p className="text-sm font-semibold text-white">Estrutura planejada</p>
               <p className="mt-2 text-sm leading-6 text-slate-300">
@@ -126,13 +135,16 @@ export default function Services() {
                 cada atendimento em um painel próprio.
               </p>
             </div>
+            */}
 
+            {/*
             <Link
               href="/contact"
               className="mt-6 inline-flex text-sm font-semibold text-sky-300 transition hover:text-sky-200"
             >
               Ajustar esse fluxo depois com integração real
             </Link>
+            */}
           </aside>
         </section>
       </MaxWidth>

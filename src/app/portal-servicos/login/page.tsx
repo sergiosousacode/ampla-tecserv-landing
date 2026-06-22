@@ -20,15 +20,18 @@ export default function PortalLoginPage() {
             </span>
 
             <h1 className="mt-5 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-              Entre no portal para operar contratos, servicos e acompanhar o cliente.
+              Entre no portal para operar contratos, serviços e acompanhar o cliente.
             </h1>
 
+            {/*
             <p className="mt-5 max-w-3xl text-base leading-7 text-white/85 sm:text-lg dark:text-text">
               O mesmo login passa a atender administracao, operacao interna e a
               futura experiencia do cliente. A permissao e definida pelo perfil
               salvo no banco e cada usuario segue para a sua area correta.
             </p>
+            */}
 
+            {/*
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               <article className="rounded-2xl bg-slate-950/20 p-5 ring-1 ring-white/15 dark:bg-slate-900/40">
                 <h2 className="text-lg font-semibold">Usuários</h2>
@@ -49,6 +52,7 @@ export default function PortalLoginPage() {
                 </p>
               </article>
             </div>
+            */}
           </div>
 
           <aside className="rounded-[2rem] bg-slate-950 p-6 text-white shadow-2xl ring-1 ring-white/10 sm:p-8 dark:bg-slate-900">
@@ -64,14 +68,17 @@ export default function PortalLoginPage() {
               </span>
             </div>
 
+            {/*
             <p className="mt-4 text-sm leading-6 text-slate-300">
               O administrador inicial ainda nasce pelo seed com base nas
               variáveis de ambiente, mas o portal agora autentica qualquer
               usuario ativo e redireciona conforme o perfil salvo no banco.
             </p>
+            */}
 
             <LoginForm />
 
+            {/*
             <div className="mt-8 rounded-2xl border border-dashed border-white/15 bg-white/5 p-4">
               <p className="text-sm font-semibold text-white">Fluxo previsto</p>
               <p className="mt-2 text-sm leading-6 text-slate-300">
@@ -79,6 +86,7 @@ export default function PortalLoginPage() {
                 segue para uma area separada de acompanhamento.
               </p>
             </div>
+            */}
 
             <Link
               href="/portal-servicos"

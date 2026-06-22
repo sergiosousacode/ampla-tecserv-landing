@@ -1,8 +1,13 @@
-import bcrypt from "bcrypt";
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { UserRole, UserStatus } from "@prisma/client";
+import { UserRole } from "@prisma/client";
+import {
+  getActivePortalSessionUser,
+  validatePortalCredentials as validateCredentials,
+} from "@/application/portal/auth";
+import { createPrismaUsersRepository } from "@/infra/portal/prisma-users-repository";
+import { bcryptPasswordHasher } from "@/infra/portal/bcrypt-password-hasher";
 import { getPrisma } from "@/lib/prisma";
 import {
   canAccessAdmin,
@@ -11,8 +16,6 @@ import {
 
 export const PORTAL_SESSION_COOKIE = "ampla_portal_session";
 const PORTAL_SESSION_MAX_AGE = 60 * 60 * 8;
-const DUMMY_PASSWORD_HASH =
-  "$2b$10$CwTycUXWue0Thq9StjUM0uJ8UQ4m4v1C7L1NVr7DiIP9N6byN1NsS";
 
 interface PortalSessionPayload {
   userId: string;
@@ -99,25 +102,15 @@ function verifySignedSessionToken(token: string) {
 }
 
 export async function validatePortalCredentials(email: string, password: string) {
-  const normalizedEmail = email.trim().toLowerCase();
-
   const prisma = getPrisma();
-  const user = await prisma.user.findUnique({
-    where: { email: normalizedEmail },
-  });
+  const usersRepository = createPrismaUsersRepository(prisma);
 
-  if (!user || user.status !== UserStatus.ACTIVE) {
-    await bcrypt.compare(password, DUMMY_PASSWORD_HASH);
-    return null;
-  }
-
-  const passwordMatches = await bcrypt.compare(password, user.passwordHash);
-
-  if (!passwordMatches) {
-    return null;
-  }
-
-  return user;
+  return validateCredentials(
+    usersRepository,
+    bcryptPasswordHasher,
+    email,
+    password
+  );
 }
 
 export async function createPortalSession(userId: string) {
@@ -162,13 +155,12 @@ export async function isPortalAuthenticated() {
     return false;
   }
 
-  const prisma = getPrisma();
-  const user = await prisma.user.findUnique({
-    where: { id: session.userId },
-    select: { id: true, status: true },
-  });
+  const user = await getActivePortalSessionUser(
+    createPrismaUsersRepository(getPrisma()),
+    session.userId
+  );
 
-  return Boolean(user && user.status === UserStatus.ACTIVE);
+  return Boolean(user);
 }
 
 export async function getPortalSessionUser() {
@@ -186,25 +178,12 @@ export async function getPortalSessionUser() {
     return null;
   }
 
-  const prisma = getPrisma();
-
-  const user = await prisma.user.findUnique({
-    where: { id: session.userId },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-      status: true,
-    },
-  });
+  const user = await getActivePortalSessionUser(
+    createPrismaUsersRepository(getPrisma()),
+    session.userId
+  );
 
   if (!user) {
-    await clearPortalSession();
-    return null;
-  }
-
-  if (user.status !== UserStatus.ACTIVE) {
     await clearPortalSession();
     return null;
   }
