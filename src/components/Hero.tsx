@@ -9,22 +9,11 @@ export default function Hero() {
         </span>
 
         <h3 className="mt-5 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-          SUPORTE E ASSESSORIA PARA EMPRESAS QUE NÃO PODEM PARAR.
+          TECNOLOGIAS E GESTÃO PARA PEQUENOS EMPREENDIMENTOS.
         </h3>
 
         <p className="mx-auto mt-5 max-w-4xl text-base leading-7 text-white/85 sm:text-lg dark:text-text">
-          Resolvemos os problemas de tecnologia que travam o crescimento da sua
-          empresa. Criamos sistemas e aplicações sob medida para automatizar
-          processos, reduzir erros e ganhar tempo. Implantamos, prestamos suporte e
-          mantemos tudo funcionando para você focar no que realmente importa:
-          <strong> VENDER e CRESCER</strong>.
-        </p>
-
-        <p className="mx-auto mt-4 max-w-4xl text-base leading-7 text-white/85 sm:text-lg dark:text-text">
-          Atuamos com consultoria em TI para organizar a casa, melhorar a gestao
-          e cortar desperdÍcios. Também oferecemos suporte técnico, manutênção de
-          equipamentos e treinamentos práticos para que sua equipe produza mais e
-          dependa menos de improviso.
+          Somos especialistas em assessoria para drogarias e automação comercial para pequenos negócios. Automatizamos processos, organizamos a gestão e mantemos tudo funcionando — para você focar no que importa: <strong>VENDER e CRESCER.</strong>
         </p>
 
         <div className="mt-8">

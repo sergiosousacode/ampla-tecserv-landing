@@ -2,9 +2,9 @@ import { MaxWidth } from "@/components/Layout/MaxWidth";
 import { Wrapper } from "@/components/Layout/Wrapper";
 
 export const metadata = {
-  title: "Sobre a Ampla TecServ | Suporte e Assessoria em TI",
+  title: "Sobre a Ampla TecServ | TI, Sistemas e Assessoria ANVISA",
   description:
-    "Conheça a Ampla TecServ, empresa especializada em suporte técnico, assessoria em TI e soluções tecnológicas para empresas que buscam eficiência e segurança.",
+    "Conheça a Ampla TecServ. Há mais de 10 anos oferecendo suporte de TI, desenvolvimento de sistemas, automação comercial e assessoria ANVISA para empresas em todo o Brasil.",
 };
 
 export default function About() {
@@ -18,71 +18,61 @@ export default function About() {
             </span>
 
             <h1 className="mt-5 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-              Uma trajetória construída com proximidade, suporte técnico em constante
-              evolução.
+              Quem somos?
             </h1>
 
             <div className="mt-6 space-y-4 text-base leading-7 text-white/85 sm:text-lg dark:text-text">
               <p>
-                A Ampla TecServ iniciou sua história em 2014, no Estado de
-                Pernambuco. No início, atuavamos com assessoria farmacêutica para
-                drogarias, incluindo o suporte ao SNGPC (sistema responsável pelo
-                envio dos arquivos XML para a ANVISA).
+                A Ampla TecServ nasceu em 2014, em Pernambuco, com um propósito claro: simplificar a tecnologia para quem toca um negócio de verdade.
               </p>
               <p>
-                Com o passar do tempo, ampliamos nossa atuação e passamos a
-                oferecer softwares de automação comercial de baixo custo,
-                pensados especialmente para pequenos empreendimentos, tanto
-                drogarias quanto outros tipos de comércios.
+                Começamos com assessoria farmacêutica para drogarias, incluindo suporte ao SNGPC e envio dos arquivos XML à ANVISA. Com o tempo, ampliamos nossa atuação e passamos a oferecer soluções de automação comercial acessíveis para pequenos negócios — drogarias, farmácias e outros tipos de comércio.
               </p>
               <p>
-                Hoje, estamos sediados no estado da Paraíba e trabalhamos com
-                softwares homologados e meios de pagamento que facilitam o dia a
-                dia dos nossos clientes, alem de trazer mais seguranca e ampliação 
-                no faturamento.
+                Hoje, sediados na Paraíba e com 12 anos de trajetória, atendemos clientes em todo o Brasil. Nossa atuação cobre desde softwares homologados e meios de pagamento até o desenvolvimento de aplicações web sob medida — sempre com suporte próximo e comprometido com o crescimento de cada cliente.
               </p>
               <p>
-                Contamos com parceiros comerciais que fornecem alguns dos
-                melhores softwares homologados do país. Somando a isso, temos
-                uma equipe de profissionais e parceiros qualificados, prontos para oferecer
-                suporte sempre que necessário.
+                Somos especialistas em assessoria a drogarias e conformidade com a ANVISA, e trabalhamos com parceiros que oferecem alguns dos melhores softwares homologados do país.
               </p>
               <p>
-                Nossa trajetória sempre foi construída no porta a porta, prezando sempre na
-                qualidade dos servicos prestados e no crescimento de nossos clientes. Atuamos com assessoria
-                farmacêutica para drogarias em todo o Brasil, transmitindo
-                confianca e eficiência aos nossos clientes.
+                Nossa história foi construída no porta a porta, com qualidade, confiança e foco no resultado dos nossos clientes. E é assim que seguimos.
               </p>
             </div>
           </div>
 
           <aside className="rounded-[2rem] bg-white p-6 text-slate-900 shadow-xl ring-1 ring-slate-200 sm:p-8 dark:bg-slate-900 dark:text-text dark:ring-white/10">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-300">
-              O que sustenta a Ampla
+              Porque escolher a AMPLA TecServ?
             </p>
 
             <div className="mt-6 space-y-5">
               <div className="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 dark:bg-slate-950/50 dark:ring-white/10">
-                <h2 className="text-lg font-semibold">Atendimento próximo</h2>
+                <h2 className="text-lg font-semibold">Atendimento personalizado</h2>
                 <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
-                  Crescemos com relacionamento direto, linguagem simples e apoio
-                  contínuo para empresas que precisam de resposta rápida.
+                  Seja onde for, estamos sempre ao seu lado com suporte e orientação remota ou presencial. Atualmente ampliamos nosso atendimento em todo território nacional e oferecemos nossas soluções conforme sua necessidade.
+                  <p>
+                    <i>✌️Acreditar em nossos clientes é o segredo do nosso sucesso!</i>
+                  </p>
                 </p>
               </div>
 
               <div className="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 dark:bg-slate-950/50 dark:ring-white/10">
-                <h2 className="text-lg font-semibold">Especialização prática</h2>
+                <h2 className="text-lg font-semibold">Somos especialistas em Assessoria farmacêutica</h2>
                 <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
-                  Unimos assessoria para drogarias, automação comercial e suporte
-                  operacional em uma entrega mais completa.
+                  Burocracia é complicado e costumamos descomplicar. Fazemos sua análise na hora e entregamos o parece técnico sem compromisso, sem surpresas e com garantia de quem faz e acontece. Garantimos do pagamento de sua GRU e fazemos todo acompanhamento até a publicação do DOU.
+                  <p>
+                    ✌️<i>Garantia de quem sabe fazer!</i>
+                  </p>
                 </p>
               </div>
 
               <div className="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 dark:bg-slate-950/50 dark:ring-white/10">
-                <h2 className="text-lg font-semibold">Crescimento com segurança</h2>
+                <h2 className="text-lg font-semibold">12 anos de experiência no Mercado</h2>
                 <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
-                  A evolucao da empresa acompanha as necessidades dos clientes,
-                  sem perder estabilidade, conformidade e continuidade.
+                  Sabemos que é um grande desafio empreender e uma empresa com 12 anos de prestação de serviços com seus clientes, mostra a capacidade e o compromisso na entre de produtos digitais confiáveis e melhor resolução.
+                  <p>
+                    <i>✌️Nós não temos clientes, temos parceiros. Vem pro time AMPLA!</i>
+                  </p>
                 </p>
               </div>
             </div>
