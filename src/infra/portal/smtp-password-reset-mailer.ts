@@ -17,12 +17,6 @@ function getSmtpConfig(): SmtpConfig | null {
   const user = process.env.SMTP_USER?.trim();
   const password =
     process.env.SMTP_PASS?.trim() || process.env.SMTP_PASSWORD?.trim();
-
-  console.log("SMTP_HOST:", host);
-  console.log("SMTP_USER:", user);
-  console.log("SMTP_PASS existe?", !!process.env.SMTP_PASS);
-  console.log("SMTP_PASSWORD existe?", !!process.env.SMTP_PASSWORD);
-  console.log("Password carregada?", !!password);
   
   const from =
     process.env.SMTP_FROM?.trim() ||
