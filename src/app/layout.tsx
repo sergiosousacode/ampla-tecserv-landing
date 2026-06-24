@@ -31,6 +31,9 @@ const jsonLd = {
   url: "https://amplatecserv.com.br",
   description:
     "Empresa especializada em suporte técnico, assessoria em TI, desenvolvimento de sistemas, automação comercial e assessoria ANVISA.",
+  verification: {
+    google: "tqwMIQl0w7NZ9GKYyDr-mvfKB4shS83O_kMotZaB6K4",
+  },
   areaServed: "Brasil",
   address: {
     "@type": "PostalAddress",
@@ -39,7 +42,7 @@ const jsonLd = {
     addressCountry: "BR",
   },
   sameAs: [
-    "https://www.linkedin.com/in/sergiosousa-tec/"
+    "https://www.linkedin.com/company/111118222/admin/dashboard/"
   ],
 };
 
