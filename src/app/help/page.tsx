@@ -5,7 +5,7 @@ import Button_baixar from "@/components/ui/Button_baixar";
 export const metadata = {
   title: "Help Desk | Ampla TecServ",
   description:
-    "Acesse a central de ajuda e abra chamados de suporte com a Ampla TecServ.",
+    "Acesse a central de ajuda e suporte helpdesk de chamados com a Ampla TecServ.",
 };
 
 export default function Help() {
@@ -23,9 +23,7 @@ export default function Help() {
             </h1>
 
             <p className="mt-5 max-w-3xl text-base leading-7 text-white/85 sm:text-lg dark:text-text">
-              Se você já e cliente, esta e a porta de entrada para registrar sua
-              demandas, organizar o atendimento e acelerar o suporte técnico da
-              sua demanda.
+              Se você já e cliente, faça o download do aquivo abaixo para podermos te ajudar com o HelpDesk. Execute na sua máquina e tire um print da tela para quue o técnico posso atender sua demanda. Você verá uma tela onde você confirma a conexão.
             </p>
 
             <div className="mt-8">
@@ -42,16 +40,16 @@ export default function Help() {
               <div className="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 dark:bg-slate-950/50 dark:ring-white/10">
                 <h2 className="text-lg font-semibold">Abrir chamado com contexto</h2>
                 <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
-                  Informe o problema, prioridade e detalhes técnicos para reduzir
+                  Você poderá clicar em "SOLICITAR AJUDA" abaixa para informar o problema, prioridade e detalhes técnicos para reduzir
                   retrabalho e acelerar o ínicio do seu atendimento.
                 </p>
               </div>
 
               <div className="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 dark:bg-slate-950/50 dark:ring-white/10">
-                <h2 className="text-lg font-semibold">Acompanhar a execução</h2>
+                <h2 className="text-lg font-semibold">Acompanhar a execução.</h2>
                 <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
                   Use o helpdesk como ponto central para acesso remoto, nós verificamos suas
-                  pendências e os próximos passos de sua solução.
+                  pendências e os próximos passos de sua solução. Esteja sempre presente em tela, algumas observações poderão ser solicitadas e acompanhando o processo você aprende com as ocorrências. Mantenha o software sempre bem atualizado.
                 </p>
               </div>
             </div>
