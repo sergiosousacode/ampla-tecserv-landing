@@ -69,7 +69,7 @@ export default function About() {
               <div className="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 dark:bg-slate-950/50 dark:ring-white/10">
                 <h2 className="text-lg font-semibold">12 anos de experiência no Mercado</h2>
                 <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
-                  Sabemos que é um grande desafio empreender e uma empresa com 12 anos de prestação de serviços com seus clientes, mostra a capacidade e o compromisso na entre de produtos digitais confiáveis e melhor resolução.
+                  Sabemos que é um grande desafio empreender e uma empresa com 12 anos de prestação de serviços com seus clientes, mostra a capacidade e o compromisso na entrega de produtos digitais confiáveis e melhor resolução.
                   <p>
                     <i>✌️Nós não temos clientes, temos parceiros. Vem pro time AMPLA!</i>
                   </p>
