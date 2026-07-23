@@ -29,6 +29,7 @@ export function Navbar() {
           <li><Link href="/" className="hover:text-sky-600">Home</Link></li>
           <li><Link href="/about" className="hover:text-sky-600">Sobre</Link></li>
           <li><Link href="/contact" className="hover:text-sky-600">Contato</Link></li>
+          <li><Link href="/blog" className="hover:text-sky-600">Blog</Link></li>
           <li><Link href="/portal-servicos" className="hover:text-sky-600">Portal de Serviços</Link></li>
           <li><Link href="/help" className="hover:text-sky-600">Ajuda</Link></li>
 
