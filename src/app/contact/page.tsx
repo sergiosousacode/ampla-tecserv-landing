@@ -4,6 +4,16 @@ import Button_wa from "@/components/ui/Button_wa";
 import Button_email from "@/components/ui/Button_email";
 
 export const metadata = {
+  alternates: { canonical: "/contact" },
+  openGraph: {
+  title: "Entre em Contato | Ampla TecServ",
+  description:
+    "Entre em contato com a Ampla TecServ e fale com especialistas em suporte e assessoria em TI.",
+    url: "https://www.amplatecserv.com.br/contact",
+    siteName: "Ampla TecServ",
+    locale: "pt_BR",
+    type: "website",
+  },
   title: "Entre em Contato | Ampla TecServ",
   description:
     "Entre em contato com a Ampla TecServ e fale com especialistas em suporte e assessoria em TI.",

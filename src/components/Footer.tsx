@@ -59,7 +59,7 @@ export default function Footer() {
                   Contato
                 </Link>
                 <Link className="transition hover:text-white" href="/portal-servicos">
-                  Portal de servicos
+                  Serviços
                 </Link>
                 <Link className="transition hover:text-white" href="/help">
                   Ajuda
