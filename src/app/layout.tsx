@@ -7,7 +7,11 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://amplatecserv.com.br"),
+  metadataBase: new URL("https://www.amplatecserv.com.br"),
+
+  alternates: {
+    canonical: "/",
+},
 
   title: {
     default: "Ampla TecServ | Suporte e Assessoria em TI",
@@ -37,7 +41,7 @@ export const metadata: Metadata = {
     title: "Ampla TecServ | Suporte e Assessoria em TI",
     description:
       "Soluções em suporte técnico, assessoria em TI, desenvolvimento de sistemas e consultoria ANVISA.",
-    url: "https://amplatecserv.com.br",
+    url: "https://www.amplatecserv.com.br",
     siteName: "Ampla TecServ",
     locale: "pt_BR",
     type: "website",
@@ -53,7 +57,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: "Ampla TecServ",
-  url: "https://amplatecserv.com.br",
+  url: "https://www.amplatecserv.com.br",
   description:
     "Empresa especializada em suporte técnico, assessoria em TI, desenvolvimento de sistemas, automação comercial e assessoria ANVISA.",
   areaServed: "Brasil",
