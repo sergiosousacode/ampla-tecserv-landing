@@ -1,19 +1,60 @@
-name: Deploy Docker VM
+name: Build GHCR and Deploy Institutional
 
 on:
   push:
     tags:
       - 'v*.*.*'
 
+permissions:
+  contents: read
+  packages: write
+
+# Serializa publicação de latest e atualização do institucional.
+concurrency:
+  group: ampla-institucional-production
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout da tag
         uses: actions/checkout@v4
 
-      - name: Deploy via SSH (Docker)
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Autenticar no GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Construir e publicar imagem institucional
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/sergiosousacode/ampla-tecserv-landing:latest
+            ghcr.io/sergiosousacode/ampla-tecserv-landing:${{ github.ref_name }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ github.ref_name }}
+          build-args: |
+            NEXT_PUBLIC_FACEBOOK=${{ vars.NEXT_PUBLIC_FACEBOOK }}
+            NEXT_PUBLIC_INSTAGRAM=${{ vars.NEXT_PUBLIC_INSTAGRAM }}
+            NEXT_PUBLIC_LINKEDIN=${{ vars.NEXT_PUBLIC_LINKEDIN }}
+            NEXT_PUBLIC_WHATSAPP=${{ vars.NEXT_PUBLIC_WHATSAPP }}
+            NEXT_PUBLIC_EMAIL=${{ vars.NEXT_PUBLIC_EMAIL }}
+
+      # Só executa após a publicação; imagens privadas exigem login prévio na EC2.
+      - name: Atualizar somente o institucional via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SERVER_IP }}
@@ -24,13 +65,7 @@ jobs:
             cd /home/ubuntu/ampla-tecserv-landing
             git fetch --all
             git checkout main
-            git pull origin main
+            git pull --ff-only origin main
 
-            export NEXT_PUBLIC_FACEBOOK='${{ vars.NEXT_PUBLIC_FACEBOOK }}'
-            export NEXT_PUBLIC_INSTAGRAM='${{ vars.NEXT_PUBLIC_INSTAGRAM }}'
-            export NEXT_PUBLIC_LINKEDIN='${{ vars.NEXT_PUBLIC_LINKEDIN }}'
-            export NEXT_PUBLIC_WHATSAPP='${{ vars.NEXT_PUBLIC_WHATSAPP }}'
-            export NEXT_PUBLIC_EMAIL='${{ vars.NEXT_PUBLIC_EMAIL }}'
-            docker compose down
-            docker compose build --no-cache
-            docker compose up -d --force-recreate
+            docker compose pull web
+            docker compose up -d --no-deps --no-build --pull never web

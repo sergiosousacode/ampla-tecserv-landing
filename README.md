@@ -30,18 +30,70 @@ Os valores são incorporados no build: mudar o ambiente do container não os alt
 A versão pública vem de `package.json`. O domínio canônico é fixo e usa WWW.
 O rodapé e as datas do sitemap são gerados durante o build.
 
-## Docker local
+## Imagem Docker e deploy pelo GHCR
 
-O Dockerfile usa Node apenas para compilar e copia `out/` para uma imagem
-Nginx, que serve os arquivos na porta 3000. `docker/static.conf` pertence
-somente a esse servidor interno; não substitui a configuração do proxy TLS.
-O serviço `web` mantém nome, imagem, porta e rede. O Compose conserva o
-proxy existente e suas montagens de certificados sem modificações.
+O Dockerfile usa Node apenas para compilar e copia `out/` para a imagem final
+`nginx:1.27-alpine`, que serve os arquivos na porta 3000. `docker/static.conf`
+pertence somente a esse servidor interno e não substitui o proxy TLS.
 
-Nenhum comando de implantação foi executado nesta refatoração. O workflow
-legado de deploy está preservado e ainda requer revisão antes de qualquer
-implantação futura. Não execute o Compose de produção para validar esta mudança.
-O aplicativo Regulatório é independente e está fora deste repositório/refatoração.
+O workflow `.github/workflows/deploy.yml` é disparado somente por tags `v*.*.*`.
+Faz checkout da tag, autentica no GHCR com `GITHUB_TOKEN` e constrói a imagem
+no runner para Linux AMD64 e ARM64, passando as cinco variáveis `NEXT_PUBLIC_*`
+do GitHub como build args. As permissões são `contents: read` e `packages: write`.
+Publica as duas tags:
+
+- `ghcr.io/sergiosousacode/ampla-tecserv-landing:latest`
+- `ghcr.io/sergiosousacode/ampla-tecserv-landing:<tag-git>` (por exemplo, `v1.0.0`)
+
+Somente após a publicação, o passo SSH executa:
+
+```bash
+set -e
+cd /home/ubuntu/ampla-tecserv-landing
+git fetch --all
+git checkout main
+git pull --ff-only origin main
+docker compose pull web
+docker compose up -d --no-deps --no-build --pull never web
+```
+
+Não há build, instalação npm ou `docker compose down` na EC2. Se o pull falhar,
+o script para antes de atualizar o container. A atualização tem como alvo apenas
+`web`, preservando `container_name: ampla-landing`, porta 3000 e rede `webnet`.
+O proxy existente, suas montagens e os containers regulatórios não são gerenciados
+por esses comandos. A recriação de um único container pode causar uma breve
+indisponibilidade do institucional; esse processo não garante zero downtime.
+
+O Compose usa a imagem pronta `latest` e não contém build local. Para validar
+a imagem localmente sem iniciar o Compose de produção, use
+`docker build -t ampla-institucional-local:test .`.
+O CI de build na branch main permanece independente e não publica nem implanta.
+
+### Configuração necessária antes da primeira implantação
+
+- Integrar workflow e Compose em `main` antes de disparar uma tag de release:
+  a imagem vem da tag, mas o Compose remoto continua vindo de `main`.
+- Manter os secrets `SERVER_IP`, `SERVER_USER` e `SSH_PRIVATE_KEY` existentes.
+  Configurar as variáveis públicas de contato no GitHub; valores vazios usam
+  os padrões do site. Nunca colocar segredos em variáveis `NEXT_PUBLIC_*`.
+- Permitir publicação pelo repositório no pacote GHCR caso ele já exista.
+- O GHCR cria pacotes privados por padrão. Para pull sem login, tornar o pacote
+  público. Para mantê-lo privado, autenticar previamente o mesmo usuário Docker
+  usado pelo SSH na EC2 com uma conta autorizada e um PAT classic com
+  `read:packages`, via `docker login ghcr.io --password-stdin`. O token deve ser
+  fornecido por canal seguro, nunca salvo neste repositório. O `GITHUB_TOKEN`
+  do runner não é transferido para a EC2. Nenhuma credencial foi criada aqui.
+- Preservar o diretório e o nome de projeto Compose usados atualmente no servidor,
+  para manter a rede existente. Confirmar suporte a `--pull never` no Compose v2.
+- `latest` aponta para a última execução publicada; as tags Git preservam as
+  versões. Evitar recriar tags de release. Rollback exige selecionar a versão
+  desejada separadamente; não é automático.
+
+Publicação e atualização são serializadas pelo workflow para evitar concorrência
+sobre `latest`. Nenhum deploy foi executado durante a implementação.
+
+Referências: [GHCR e autenticação](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
+e [atualização seletiva com Compose](https://docs.docker.com/reference/cli/docker/compose/up/).
 
 ## Revisões manuais
 
