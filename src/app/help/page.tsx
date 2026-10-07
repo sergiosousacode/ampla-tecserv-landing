@@ -3,6 +3,16 @@ import { Wrapper } from "@/components/Layout/Wrapper";
 import Button_baixar from "@/components/ui/Button_baixar";
 
 export const metadata = {
+  alternates: { canonical: "/help" },
+  openGraph: {
+  title: "Help Desk | Ampla TecServ",
+  description:
+    "Acesse a central de ajuda e suporte helpdesk de chamados com a Ampla TecServ.",
+    url: "https://www.amplatecserv.com.br/help",
+    siteName: "Ampla TecServ",
+    locale: "pt_BR",
+    type: "website",
+  },
   title: "Help Desk | Ampla TecServ",
   description:
     "Acesse a central de ajuda e suporte helpdesk de chamados com a Ampla TecServ.",
@@ -40,7 +50,7 @@ export default function Help() {
               <div className="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200 dark:bg-slate-950/50 dark:ring-white/10">
                 <h2 className="text-lg font-semibold">Abrir chamado com contexto</h2>
                 <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
-                  Você poderá clicar em "SOLICITAR AJUDA" abaixa para informar o problema, prioridade e detalhes técnicos para reduzir
+                  Você poderá clicar em &quot;SOLICITAR AJUDA&quot; abaixa para informar o problema, prioridade e detalhes técnicos para reduzir
                   retrabalho e acelerar o ínicio do seu atendimento.
                 </p>
               </div>

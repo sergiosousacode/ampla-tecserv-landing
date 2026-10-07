@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ampla TecServ — institucional estático
 
-## Getting Started
+Site público em Next.js 16, React 19, TypeScript e Tailwind CSS.
+Domínio canônico: https://www.amplatecserv.com.br.
 
-First, run the development server:
+## Desenvolvimento e validação
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O build exporta o site completo para `out/`. Não há banco, autenticação,
+Server Actions ou servidor Next.js em runtime. `next start` não atende a
+exportação estática; por isso o antigo script `start` foi removido.
+Não há suíte de testes configurada.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Rotas públicas: `/`, `/about`, `/contact`, `/help` e `/portal-servicos`.
+A última conserva a URL antiga como apresentação pública de serviços.
+O sitemap inclui todas essas páginas. Imagens são servidas diretamente,
+sem endpoint de otimização. Menu móvel e tema continuam interativos no navegador.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Configuração
 
-## Learn More
+`.env.example` lista as cinco variáveis públicas opcionais para redes sociais,
+WhatsApp e e-mail. Valores vazios usam os padrões em `src/config/env.ts`.
+Os valores são incorporados no build: mudar o ambiente do container não os altera.
+A versão pública vem de `package.json`. O domínio canônico é fixo e usa WWW.
+O rodapé e as datas do sitemap são gerados durante o build.
 
-To learn more about Next.js, take a look at the following resources:
+## Docker local
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+O Dockerfile usa Node apenas para compilar e copia `out/` para uma imagem
+Nginx, que serve os arquivos na porta 3000. `docker/static.conf` pertence
+somente a esse servidor interno; não substitui a configuração do proxy TLS.
+O serviço `web` mantém nome, imagem, porta e rede. O Compose conserva o
+proxy existente e suas montagens de certificados sem modificações.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Nenhum comando de implantação foi executado nesta refatoração. O workflow
+legado de deploy está preservado e ainda requer revisão antes de qualquer
+implantação futura. Não execute o Compose de produção para validar esta mudança.
+O aplicativo Regulatório é independente e está fora deste repositório/refatoração.
 
-## Deploy on Vercel
+## Revisões manuais
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Revisar visual e interações em navegador, inclusive tema salvo e menu móvel.
+- O download da central de ajuda já estava desativado com “em breve”.
+- Confirmar os destinos externos e valores públicos desejados para o próximo build.
+- Planejar separadamente a retirada dos recursos antigos de produção; nenhum
+  container, volume, dado, certificado ou configuração remota foi removido.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Veja o inventário e a validação em [docs/refatoracao-estatica.md](docs/refatoracao-estatica.md).

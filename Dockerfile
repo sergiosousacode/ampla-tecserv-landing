@@ -3,8 +3,6 @@ FROM node:20.19-slim AS builder
 
 WORKDIR /app
 
-RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
-
 ARG NEXT_PUBLIC_FACEBOOK
 ARG NEXT_PUBLIC_INSTAGRAM
 ARG NEXT_PUBLIC_LINKEDIN
@@ -18,29 +16,17 @@ ENV NEXT_PUBLIC_WHATSAPP=$NEXT_PUBLIC_WHATSAPP
 ENV NEXT_PUBLIC_EMAIL=$NEXT_PUBLIC_EMAIL
 
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
 COPY . .
-RUN npx prisma generate
 RUN npm run build
 
 
-# ===== STAGE 2: produção =====
-FROM node:20.19-slim
+# ===== STAGE 2: arquivos estáticos =====
+FROM nginx:1.27-alpine
 
-WORKDIR /app
-
-ENV NODE_ENV=production
-
-RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
-
-# copia somente o necessário
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
+COPY docker/static.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/out /usr/share/nginx/html
 
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["nginx", "-g", "daemon off;"]

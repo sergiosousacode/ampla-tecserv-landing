@@ -2,6 +2,16 @@ import { MaxWidth } from "@/components/Layout/MaxWidth";
 import { Wrapper } from "@/components/Layout/Wrapper";
 
 export const metadata = {
+  alternates: { canonical: "/about" },
+  openGraph: {
+  title: "Sobre a Ampla TecServ | TI, Sistemas e Assessoria ANVISA",
+  description:
+    "Conheça a Ampla TecServ. Há mais de 10 anos oferecendo suporte de TI, desenvolvimento de sistemas, automação comercial e assessoria ANVISA para empresas em todo o Brasil.",
+    url: "https://www.amplatecserv.com.br/about",
+    siteName: "Ampla TecServ",
+    locale: "pt_BR",
+    type: "website",
+  },
   title: "Sobre a Ampla TecServ | TI, Sistemas e Assessoria ANVISA",
   description:
     "Conheça a Ampla TecServ. Há mais de 10 anos oferecendo suporte de TI, desenvolvimento de sistemas, automação comercial e assessoria ANVISA para empresas em todo o Brasil.",
@@ -50,9 +60,9 @@ export default function About() {
                 <h2 className="text-lg font-semibold">Atendimento personalizado</h2>
                 <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
                   Seja onde for, estamos sempre ao seu lado com suporte e orientação remota ou presencial. Atualmente ampliamos nosso atendimento em todo território nacional e oferecemos nossas soluções conforme sua necessidade.
-                  <p>
+                  <span className="block">
                     <i>✌️Acreditar em nossos clientes é o segredo do nosso sucesso!</i>
-                  </p>
+                  </span>
                 </p>
               </div>
 
@@ -60,9 +70,9 @@ export default function About() {
                 <h2 className="text-lg font-semibold">Somos especialistas em Assessoria farmacêutica</h2>
                 <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
                   Burocracia é complicado e costumamos descomplicar. Fazemos sua análise na hora e entregamos o parece técnico sem compromisso, sem surpresas e com garantia de quem faz e acontece. Garantimos do pagamento de sua GRU e fazemos todo acompanhamento até a publicação do DOU.
-                  <p>
+                  <span className="block">
                     ✌️<i>Garantia de quem sabe fazer!</i>
-                  </p>
+                  </span>
                 </p>
               </div>
 
@@ -70,9 +80,9 @@ export default function About() {
                 <h2 className="text-lg font-semibold">12 anos de experiência no Mercado</h2>
                 <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
                   Sabemos que é um grande desafio empreender e uma empresa com 12 anos de prestação de serviços com seus clientes, mostra a capacidade e o compromisso na entrega de produtos digitais confiáveis e melhor resolução.
-                  <p>
+                  <span className="block">
                     <i>✌️Nós não temos clientes, temos parceiros. Vem pro time AMPLA!</i>
-                  </p>
+                  </span>
                 </p>
               </div>
             </div>
