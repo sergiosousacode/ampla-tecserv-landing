@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://amplatecserv.com.br/sitemap.xml",
+    sitemap: "https://www.amplatecserv.com.br/sitemap.xml",
   };
 }
